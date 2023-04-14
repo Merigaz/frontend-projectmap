@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "../views/Login";
-import MapView from "../views/Map";
+import Home from "../views/Home";
+import ApiMap from "../views/ApiMap";
+import FormView from "../views/FormView";
 
 const router = createBrowserRouter([
   {
@@ -8,18 +10,18 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/Map",
-    element: <MapView />,
-   /*  children: [
+    path: "/home",
+    element: <Home />,
+     children: [
       {
-        path: "/",
-        element: "",
+        path: "/home/map",
+        element: <ApiMap/>,
       },
       {
-        path: "/",
-        element: "",
-      }] */
-  },
+        path: "/home/form",
+        element: <FormView/>,
+      }] 
+  }, 
 ]);
 const Router = () => {
   return <RouterProvider router={router} />;

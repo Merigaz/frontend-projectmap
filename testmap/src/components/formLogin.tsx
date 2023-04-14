@@ -1,7 +1,7 @@
 import { Button, Card, Form, Input } from "antd";
 import { EyeInvisibleOutlined, MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 function FormLogin() {
   const navigate = useNavigate();
@@ -64,7 +64,8 @@ function FormLogin() {
           </Form.Item>
 
           <Form.Item style={{ textAlign: "center" }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" href='/home/map' >
+              
               Iniciar sesión
             </Button>
           </Form.Item>

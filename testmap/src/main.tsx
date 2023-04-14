@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ConfigProvider from "antd/es/config-provider";
 import { componentsPrimaryTheme, primaryTheme } from "./styles/primaryTheme";
 import Router from "./router/router";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,14 +16,16 @@ const queryClient = new QueryClient({
   },
 });
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <ConfigProvider
-    theme={{
-      token: primaryTheme,
-      components: componentsPrimaryTheme,
-    }}
-  >
-    <QueryClientProvider client={queryClient}>
-      <Router />
-    </QueryClientProvider>
-  </ConfigProvider>
+  <Provider store={store}>
+    <ConfigProvider
+      theme={{
+        token: primaryTheme,
+        components: componentsPrimaryTheme,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
+    </ConfigProvider>
+  </Provider>
 );

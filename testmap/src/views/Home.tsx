@@ -1,15 +1,19 @@
-import { Col, Layout, Row  } from "antd";
+import { Card, Col, Layout, Row } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Navbar from "../components/navBar";
-import { LayoutContentStyle } from "../styles/primaryTheme";
+import {
+  HomeContentStyle,
+  LayoutStyle,
+  LoginContentStyle,
+} from "../styles/primaryTheme";
 import Logo from "../components/logo";
 import { Outlet } from "react-router-dom";
+import { LoadScript } from "@react-google-maps/api";
 
-
-function MapView() {
+function Home() {
   return (
     <>
-      <Layout style={LayoutContentStyle} >
+      <Layout style={LayoutStyle}>
         <Layout style={{ backgroundColor: "transparent" }}>
           <Header style={{ backgroundColor: "transparent" }}>
             <Row justify="space-around" align="top">
@@ -19,8 +23,12 @@ function MapView() {
               </Col>
             </Row>
           </Header>
-          <Layout style={{ backgroundColor: "transparent", padding: "36px" }}>
-            <Content ><Outlet /></Content>
+          <Layout style={{ backgroundColor: "transparent", padding: "80px" }}>
+            <Content style={HomeContentStyle}>
+              <LoadScript googleMapsApiKey={import.meta.env.VITE_API_KEY}>
+                <Outlet />
+              </LoadScript>
+            </Content>
             <Footer style={{ backgroundColor: "transparent" }}></Footer>
           </Layout>
         </Layout>
@@ -28,4 +36,4 @@ function MapView() {
     </>
   );
 }
-export default MapView;
+export default Home;

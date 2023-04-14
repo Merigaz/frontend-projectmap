@@ -11,8 +11,8 @@ export const componentsPrimaryTheme = {
     colorItemTextHover: "#AFA9BD",
   },
   Typography: {
-    colorText: "#ffffff",
-    colorTextHeading: "#ffffff",
+    colorText: "#665982",
+    colorTextHeading: "#665982",
   },
 };
 export const LoginContentStyle = {
@@ -25,10 +25,15 @@ export const LoginContentStyle = {
   justifyContent: "center",
   alignItems: "center",
 };
-export const LayoutContentStyle = {
+export const LayoutStyle = {
   height: "100vh",
   backgroundImage: `url(${Bgimg})`,
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
+};
+export const HomeContentStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
