@@ -1,9 +1,11 @@
 import axios from "axios";
-axios.defaults.baseURL = 'http://localhost:8080/';
-
-async function postForm() {
-  const { data } = await axios.post('https://pokeapi.co/api/v2/pokemon/ditto')
-  return data
+const BASE_URL = import.meta.env.VITE_BASE_URL
+async function getData() {
+  const response = await axios.get(`${BASE_URL}/submitform`);
+  return response.data;
 }
-
-export default postForm;
+const postData = async (payload:any) => {
+    const response = await axios.post(`${BASE_URL}/submitform`, payload);
+    return response.data;
+};
+export default getData; postData;

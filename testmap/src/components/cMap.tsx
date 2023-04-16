@@ -1,56 +1,26 @@
-import { GoogleMap } from "@react-google-maps/api";
-import {  useSelector } from "react-redux";
-import axios from 'axios';
+import { GoogleMap, Marker } from "@react-google-maps/api";
+
+import { useQuery } from "react-query";
+
+import getData from "../plugins/useAxios";
 
 function ComponentMap() {
+  const { isLoading, isError, data } = useQuery("markers", getData);
 
-  const getData = async () => {
-    
-    try {
-      const { data } = await axios.get('http://localhost:8080/submitform');
-      if (data) {
-        localStorage.setItem("info", data.data)
-      }
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  getData()
-  
-  const geocoder = new google.maps.Geocoder();
-  const addresses = useSelector((state:any) => state.data);
-  addresses.forEach(( address:any, index:any) => {
-    geocoder.geocode({ address }, (results, status) => {
-      if (status == google.maps.GeocoderStatus.OK && results != null) {
-        
-        console.log(`Address ${index}: ${results[0].formatted_address}`);
-
-        console.log(`Latitude ${index}: ${results[0].geometry.location.lat()}`);
-
-        console.log(
-          `Longitude ${index}: ${results[0].geometry.location.lng()}`
-        );
-      } else {
-        alert(`Geocode was not successful for Address ${index}: ${status}`);
-      }
-    });
-  });
   const containerStyle = {
     width: "80%",
     height: "90%",
     borderRadius: "20px",
-    border: "1px solid black"
+    border: "1px solid gold",
   };
 
   const center = {
     lat: 10.9632,
     lng: -74.7964,
   };
-  
+
   return (
     <GoogleMap
-  
       mapContainerStyle={containerStyle}
       center={center}
       zoom={13}
@@ -59,11 +29,17 @@ function ComponentMap() {
         streetViewControl: false,
         mapTypeControl: false,
       }}
-    >  
-     </GoogleMap>
+    >
+      {data &&
+        data.data.map((marker: any) => (
+          <Marker
+            key={marker._id}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            title={marker.name}
+          />
+        ))}
+    </GoogleMap>
   );
 }
 
 export default ComponentMap;
-
-

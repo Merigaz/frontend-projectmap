@@ -1,20 +1,31 @@
 import { Button, Card, DatePicker, Form, Input } from "antd";
-
 import locale from "antd/es/date-picker/locale/es_ES";
-import { useDispatch } from "react-redux";
-import { addData } from "../store/reducers/dataReducer";
+import axios from "axios";
+import { useState } from "react";
 
-<DatePicker locale={locale} />;
 function ComponentForm() {
-  const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const onFinish = (values: any) => {
+  const [loading, setLoading] = useState(false);
+  const onFinish = async (values: any) => {
     const serializedValues = {
       ...values,
       date: values.date.format("YYYYMMD"),
     };
-    dispatch(addData(serializedValues));
-    form.resetFields();
+    setLoading(true);
+    try {
+      await postData(serializedValues);
+      form.resetFields();
+      console.log("Form submitted successfully");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const postData = async (payload: any) => {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/submitform`, payload);
+    return response.data;
   };
   return (
     <>
@@ -45,4 +56,5 @@ function ComponentForm() {
     </>
   );
 }
+
 export default ComponentForm;
