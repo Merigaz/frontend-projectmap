@@ -25,12 +25,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}
     >
       <QueryClientProvider client={queryClient}>
-      <BrowserRouter
-  basename={'https://projectmap.onrender.com'}
-  
->
+      
 <Router />
-</BrowserRouter>
+
 
         
       </QueryClientProvider>
