@@ -6,6 +6,7 @@ import { componentsPrimaryTheme, primaryTheme } from "./styles/primaryTheme";
 import Router from "./router/router";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,7 +25,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <Router />
+      <BrowserRouter
+  basename={'https://projectmap.onrender.com'}
+  
+>
+<Router />
+</BrowserRouter>
+
+        
       </QueryClientProvider>
     </ConfigProvider>
   </Provider>
