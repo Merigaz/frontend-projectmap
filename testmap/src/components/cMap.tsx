@@ -1,6 +1,6 @@
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useDispatch, useSelector } from "react-redux";
-import { addLocations } from "../store/reducers/locationReducer";
+import { GoogleMap } from "@react-google-maps/api";
+import {  useSelector } from "react-redux";
+
 
 function ComponentMap() {
  

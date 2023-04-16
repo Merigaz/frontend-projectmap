@@ -23,7 +23,7 @@ function ComponentForm() {
           <Form.Item label="Nombre" name="name">
             <Input />
           </Form.Item>
-          <Form.Item label="Cédula" name="ID">
+          <Form.Item label="Cédula" name="id">
             <Input />
           </Form.Item>
           <Form.Item label="Dirección" name="address">
