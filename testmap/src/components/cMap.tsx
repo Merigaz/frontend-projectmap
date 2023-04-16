@@ -1,10 +1,23 @@
 import { GoogleMap } from "@react-google-maps/api";
 import {  useSelector } from "react-redux";
-
+import axios from 'axios';
 
 function ComponentMap() {
- 
+
+  const getData = async () => {
     
+    try {
+      const { data } = await axios.get('http://localhost:8080/submitform');
+      if (data) {
+        localStorage.setItem("info", data.data)
+      }
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  getData()
+  
   const geocoder = new google.maps.Geocoder();
   const addresses = useSelector((state:any) => state.data);
   addresses.forEach(( address:any, index:any) => {
