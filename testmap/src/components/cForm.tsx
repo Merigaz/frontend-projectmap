@@ -7,9 +7,19 @@ function ComponentForm() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const onFinish = async (values: any) => {
+    console.log(values);
     const serializedValues = {
       ...values,
       date: values.date.format("YYYYMMD"),
+    };
+    const markerAddress = {
+      ...values,
+      address: (values.address = values.address.replace(
+        /([a-zA-Z]).*/,
+        function (match: any, letter: any) {
+          return letter + match.substring(1).replace(/\d/, "");
+        }
+      )),
     };
     setLoading(true);
     try {
@@ -24,7 +34,10 @@ function ComponentForm() {
   };
 
   const postData = async (payload: any) => {
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/submitform`, payload);
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/submitform`,
+      payload
+    );
     return response.data;
   };
   return (
