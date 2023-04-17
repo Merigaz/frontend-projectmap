@@ -18,7 +18,7 @@ function Navbar() {
         selectedKeys={[key]}
         mode="horizontal"
         items={items}
-        style={{backgroundColor: "transparent"}}
+        style={{backgroundColor: "transparent", marginLeft:"40px"}}
         />
     </>
   );

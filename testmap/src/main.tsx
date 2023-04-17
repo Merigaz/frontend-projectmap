@@ -3,10 +3,9 @@ import "antd/dist/reset.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ConfigProvider from "antd/es/config-provider";
 import { componentsPrimaryTheme, primaryTheme } from "./styles/primaryTheme";
-import Router from "./router/router";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/router";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,11 +24,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       }}
     >
       <QueryClientProvider client={queryClient}>
-      
-<Router />
-
-
-        
+        <AppRouter />
       </QueryClientProvider>
     </ConfigProvider>
   </Provider>

@@ -9,9 +9,9 @@ function ComponentMap() {
 
   const containerStyle = {
     width: "80%",
-    height: "90%",
+    height: "85%",
     borderRadius: "20px",
-    border: "1px solid gold",
+    border: "1px solid black",
   };
 
   const center = {

@@ -1,19 +1,25 @@
 import Bgimg from "../assets/LayoutBGimg.png";
 export const primaryTheme = {
-  colorPrimary: "#6B5F86",
+  colorPrimary: "#A48C59",
   colorPrimaryText: "#fcc501",
 };
 
 export const componentsPrimaryTheme = {
   Menu: {
-    colorPrimary: "#4D3E6C",
-    colorItemText: "#665982",
-    colorItemTextHover: "#AFA9BD",
+    colorPrimary: "#FFFEF7",
+    colorItemText: "#A49859",
+    colorItemTextHover: "#E6DEB7",
   },
   Typography: {
     colorText: "#665982",
     colorTextHeading: "#665982",
   },
+};
+export const LeftsiderStyle = {
+
+  width: "40px",
+  backgroundColor: "transparent",
+  
 };
 export const LoginContentStyle = {
   height: "100vh",
@@ -31,6 +37,8 @@ export const LayoutStyle = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
+  display: "flex"
+  
 };
 export const HomeContentStyle = {
   display: "flex",
