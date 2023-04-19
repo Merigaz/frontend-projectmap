@@ -7,23 +7,26 @@ function ComponentForm() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const onFinish = async (values: any) => {
-    console.log(values);
-    const serializedValues = {
+    const markerAddress = values.address/* .replace(
+      /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/,
+      function (match: any, prefix: any, suffix: any) {
+        return prefix.replace(/\d/, "") + suffix;
+      }
+    ); */
+   
+  
+    console.log(markerAddress);
+  
+    const payload = {
       ...values,
+      markerAddress: markerAddress,
       date: values.date.format("YYYYMMD"),
     };
-    const markerAddress = {
-      ...values,
-      address: (values.address = values.address.replace(
-        /([a-zA-Z]).*/,
-        function (match: any, letter: any) {
-          return letter + match.substring(1).replace(/\d/, "");
-        }
-      )),
-    };
+  
     setLoading(true);
+  
     try {
-      await postData(serializedValues);
+      await postData(payload);
       form.resetFields();
       console.log("Form submitted successfully");
     } catch (error) {
@@ -32,8 +35,10 @@ function ComponentForm() {
       setLoading(false);
     }
   };
-
+   
+ 
   const postData = async (payload: any) => {
+    console.log(payload)
     const response = await axios.post(
       `${import.meta.env.VITE_BASE_URL}/submitform`,
       payload

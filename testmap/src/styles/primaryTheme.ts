@@ -23,13 +23,10 @@ export const LeftsiderStyle = {
 };
 export const LoginContentStyle = {
   height: "100vh",
-  backgroundImage: `url(${Bgimg})`,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  backgroundColor: "transparent"
 };
 export const LayoutStyle = {
   height: "100vh",
@@ -40,8 +37,15 @@ export const LayoutStyle = {
   display: "flex"
   
 };
-export const HomeContentStyle = {
+export const ProfileContentStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-};
+  backgroundColor: "transparent"
+}
+export const LayoutHeaderStyle = {
+  backgroundColor: "transparent"
+}
+export const LayoutFooterStyle = {
+  backgroundColor: "transparent"
+}
