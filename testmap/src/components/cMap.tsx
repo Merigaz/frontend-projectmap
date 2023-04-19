@@ -2,7 +2,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 
 import { useQuery } from "react-query";
 
-import getData from "../plugins/useAxios";
+import getData from "../hooks/useAxios";
 
 function ComponentMap() {
   const { isLoading, isError, data } = useQuery("markers", getData);
@@ -20,25 +20,27 @@ function ComponentMap() {
   };
 
   return (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={13}
-      options={{
-        mapId: import.meta.env.VITE_MAP_ID,
-        streetViewControl: false,
-        mapTypeControl: false,
-      }}
-    >
-      {data &&
-        data.data.map((marker: any) => (
-          <Marker
-            key={marker._id}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            title={marker.name}
-          />
-        ))}
-    </GoogleMap>
+    <>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={13}
+        options={{
+          mapId: import.meta.env.VITE_MAP_ID,
+          streetViewControl: false,
+          mapTypeControl: false,
+        }}
+      >
+        {data &&
+          data.data.map((marker: any) => (
+            <Marker
+              key={marker._id}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              title={marker.name}
+            />
+          ))}
+      </GoogleMap>
+    </>
   );
 }
 
