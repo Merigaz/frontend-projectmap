@@ -23,7 +23,7 @@ function Main() {
             <Content>
               <div
                 style={{
-                  backgroundColor: "rgba(255, 253, 242, 0.1)",
+                  backgroundColor: "#FFFFFF",
                   borderRadius: "20px",
                   border: "2px solid #A48C59",
                   overflow: "hidden",

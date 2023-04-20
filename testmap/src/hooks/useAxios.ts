@@ -8,4 +8,8 @@ const postData = async (payload:any) => {
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/submitform`, payload);
     return response.data;
 };
-export default getData; postData;
+async function getDataNeighborhood() {
+  const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/neighborhoods`);
+  return response.data;
+}
+export default getData; postData;getDataNeighborhood;

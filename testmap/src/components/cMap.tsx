@@ -6,14 +6,20 @@ import { useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
-  BugFilled,
   FormOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
 } from "@ant-design/icons";
 import { SidebarStyle } from "../styles/primaryTheme";
+import { Modal, Button } from 'antd';
+import ComponentForm from "./cForm";
+
+
 
 function ComponentMap() {
+
+  const [visible, setVisible] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -31,17 +37,22 @@ function ComponentMap() {
   const onClick: MenuProps["onClick"] = (e) => {
     setKey(e.key.toString());
   };
+  const handleForm = () => {
+    setVisible(true)
+    console.log(visible)
+  }
   const handleZoomIn = () => {
-    setZoom((prevZoom) => prevZoom + 0.5);
+    setZoom((prevZoom) => prevZoom + 1);
   };
   const handleZoomOut = () => {
-    setZoom((prevZoom) => prevZoom - 0.5);
+    setZoom((prevZoom) => prevZoom - 1);
   };
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(12);
   const items: MenuProps["items"] = [
     {
       label: "",
       key: "Form",
+      onClick: handleForm,
       icon: <FormOutlined />,
     },
     {
@@ -83,7 +94,7 @@ function ComponentMap() {
           style={SidebarStyle}
         />
         {data &&
-          data.data.map((marker: any) => (
+          data.map((marker: any) => (
             <Marker
               key={marker._id}
               position={{ lat: marker.lat, lng: marker.lng }}
@@ -91,6 +102,16 @@ function ComponentMap() {
             />
           ))}
       </GoogleMap>
+      <Modal
+  title="Registro de direcciones"
+  open={visible}
+  onCancel={() => setVisible(false)}
+  footer={null}
+  maskClosable={false}
+  width={730}
+>
+  <ComponentForm/>
+</Modal>
     </>
   );
 }

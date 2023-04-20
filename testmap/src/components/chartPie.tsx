@@ -1,6 +1,7 @@
 import { Pie } from '@ant-design/charts';
 
 const DemoPie = () => {
+  
   const data = [
     {
       type: '分类一',
