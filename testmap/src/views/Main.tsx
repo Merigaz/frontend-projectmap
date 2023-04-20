@@ -1,9 +1,18 @@
-import { Layout } from "antd";
-import { LayoutFooterStyle, LayoutHeaderStyle, LayoutStyle } from "../styles/primaryTheme";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Avatar, Layout } from "antd";
+import {
+  HeaderStyle,
+  LayoutContentStyle,
+  LayoutHeaderStyle,
+  LayoutStyle,
+  LeftsiderStyle,
+} from "../styles/primaryTheme";
+import { Content, Header } from "antd/es/layout/layout";
 import { useCookies } from "react-cookie";
 import Login from "./Login";
 import Profile from "./Profile";
+import Navbar from "../components/navBar";
+import Sider from "antd/es/layout/Sider";
+import { UserOutlined } from "@ant-design/icons";
 
 function Main() {
   const [cookies] = useCookies(["authToken"]);
@@ -11,23 +20,21 @@ function Main() {
     <>
       <Layout style={LayoutStyle}>
         {cookies["authToken"] ? (
-          // Render protected content here
-          
-          <Header style={LayoutHeaderStyle}></Header>
-        ) : (
-          // Render logout content
-          <Header style={LayoutHeaderStyle}></Header>
-        )}
-          {cookies["authToken"] ? (
-            // Render protected content here
-            <Profile/>
-          ) : (
-            <Login />
-          )}
-            <Footer style={LayoutFooterStyle}></Footer>
-          
+          <Sider style={LeftsiderStyle} width={"24%"}><Content></Content><Content></Content><Content></Content></Sider>
+        ) : null}
+
+        <Layout style={LayoutHeaderStyle}>
+          <Layout style={LayoutContentStyle}>
+            {cookies["authToken"] ? (
+              // Render protected content here
+
+              <Profile />
+            ) : (
+              <Login />
+            )}
+          </Layout>
         </Layout>
-      
+      </Layout>
     </>
   );
 }

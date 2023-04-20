@@ -1,16 +1,11 @@
-import { BugFilled } from "@ant-design/icons";
-import type { MenuProps } from "antd";
-import { Link } from "react-router-dom";
+
+import type {MenuProps} from "antd";
+
 
 export const items: MenuProps["items"] = [
   {
-    label: <Link to="/home/form">Formulario</Link>,
-    key: "Form",
-    icon: <BugFilled />,
-  },
-  {
-    label: <Link to="/home/map">Mapa</Link>,
-    key: "Map",
-    icon: <BugFilled />,
-  },
+    label: "Profile",
+    key: "dropdown-menu-profile"
+  }
+,
 ];

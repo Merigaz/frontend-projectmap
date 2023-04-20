@@ -1,3 +1,4 @@
+import React from "react";
 import Bgimg from "../assets/LayoutBGimg.png";
 export const primaryTheme = {
   colorPrimary: "#A48C59",
@@ -16,17 +17,22 @@ export const componentsPrimaryTheme = {
   },
 };
 export const LeftsiderStyle = {
-
-  width: "40px",
   backgroundColor: "transparent",
-  
+  height: "100%",
+  top: 0,
+  left: 0,
+  zIndex: 999,
+  padding: "16px",
+  backdropFilter: "blur(5px)",
+  border: "1px",
+  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
 };
 export const LoginContentStyle = {
   height: "100vh",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "transparent"
+  backgroundColor: "transparent",
 };
 export const LayoutStyle = {
   height: "100vh",
@@ -34,18 +40,39 @@ export const LayoutStyle = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
-  display: "flex"
-  
+  display: "flex",
 };
 export const ProfileContentStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "transparent"
-}
-export const LayoutHeaderStyle = {
-  backgroundColor: "transparent"
-}
+};
+export const SidebarStyle = {
+  backdropFilter: "blur(5px)",
+  position: "absolute",
+  bottom: "10px",
+  left: "50%",
+  transform: "translateX(-50%)",
+  borderRadius: "20px",
+  backgroundColor:"#343D4B",
+  width:"16%",
+  display:"flex",
+  justifyContent: "center",
+  alignItems: "center",
+} as React.CSSProperties;
+export const HeaderStyle = {
+  backgroundColor: "transparent",
+  display: "flex",
+  justifyContent: "flex-end",
+  alignItems: "center",
+  boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.5)",
+  };
 export const LayoutFooterStyle = {
-  backgroundColor: "transparent"
-}
+  backgroundColor: "transparent",
+};
+export const LayoutHeaderStyle = {
+  backgroundColor: "transparent",
+};
+export const LayoutContentStyle = {
+  backgroundColor: "transparent",
+};
