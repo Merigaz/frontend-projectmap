@@ -30,7 +30,7 @@ function FormLogin() {
           sameSite: "none",
           secure: true,
         });
-        navigate("/map");
+        
       }
       console.log(data);
     } catch (error) {

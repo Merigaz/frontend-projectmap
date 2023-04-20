@@ -32,12 +32,12 @@ function ComponentMap() {
     setKey(e.key.toString());
   };
   const handleZoomIn = () => {
-    setZoom((prevZoom) => prevZoom + 1);
+    setZoom((prevZoom) => prevZoom + 0.5);
   };
   const handleZoomOut = () => {
-    setZoom((prevZoom) => prevZoom - 1);
+    setZoom((prevZoom) => prevZoom - 0.5);
   };
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(13);
   const items: MenuProps["items"] = [
     {
       label: "",

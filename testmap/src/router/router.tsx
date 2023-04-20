@@ -9,7 +9,6 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="/" element ={<ComponentMap />}/>
-          <Route path="form" element ={<ComponentForm />}/>
         </Route>
       </Routes>
     </Router>
