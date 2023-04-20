@@ -1,7 +1,9 @@
 import { Pie } from '@ant-design/charts';
+import { useState } from 'react';
+import axios from 'axios';
 
 const DemoPie = () => {
-  
+
   const data = [
     {
       type: '分类一',

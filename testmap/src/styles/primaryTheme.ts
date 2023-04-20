@@ -76,3 +76,10 @@ export const LayoutHeaderStyle = {
 export const LayoutContentStyle = {
   backgroundColor: "transparent",
 };
+export const ButtonLoginStyle = {
+  width:"100%"
+}
+export const CardLoginStyle = {
+  border: "1px solid black",
+  boxShadow: "0 0 5px #A48C59"
+}
