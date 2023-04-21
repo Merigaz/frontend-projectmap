@@ -2,7 +2,7 @@
 FROM node:14.17.6-alpine as build
 WORKDIR /frontend/frontend-projectmap
 COPY package.json yarn.lock ./ 
-RUN yarn install --frozen-lockfile --verbose
+RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
 COPY . .
 COPY .env .
 RUN yarn build
