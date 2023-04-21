@@ -1,10 +1,11 @@
 FROM node:latest as build
 WORKDIR /frontend/frontend-projectmap
 COPY package.json ./ 
-RUN npm install
+RUN yarn install
 COPY . .
 COPY .env .
-RUN npm run build
+RUN yarn build
+
 
 # Production stage
 FROM nginx:latest
