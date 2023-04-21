@@ -1,11 +1,10 @@
 FROM node:latest as build
 WORKDIR /frontend/frontend-projectmap
-COPY package.json yarn.lock ./ 
-RUN yarn install --frozen-lockfile
+COPY package.json ./ 
+RUN npm install
 COPY . .
 COPY .env .
-RUN yarn build
-
+RUN npm run build
 
 # Production stage
 FROM nginx:latest
