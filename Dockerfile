@@ -1,11 +1,12 @@
 # Build stage
 FROM node:alpine as build
 WORKDIR /frontend/frontend-projectmap
-COPY package.json yarn.lock ./ 
+COPY package.json yarn.lock ./
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
 COPY . .
 COPY .env .
-RUN  yarn build --max-old-space-size=4096
+RUN  yarn build
 
 
 # Production stage
