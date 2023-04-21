@@ -1,5 +1,5 @@
 # Build stage
-FROM 14.18.0-alpine as build
+FROM node:alpine as build
 WORKDIR /frontend/frontend-projectmap
 COPY package.json yarn.lock ./ 
 RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
