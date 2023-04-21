@@ -4,6 +4,7 @@ import {
   LayoutContentStyle,
   LayoutHeaderStyle,
   LayoutStyle,
+  LeftSiderContentStyle,
   LeftsiderStyle,
 } from "../styles/primaryTheme";
 import { Content, Header } from "antd/es/layout/layout";
@@ -12,30 +13,48 @@ import Login from "./Login";
 import Profile from "./Profile";
 import Sider from "antd/es/layout/Sider";
 import DemoPie from "../components/chartPie";
+import { Suspense } from "react";
+import DemoLine from "../components/chartLine";
 
 function Main() {
   const [cookies] = useCookies(["authToken"]);
   return (
     <>
       <Layout style={LayoutStyle}>
-        {cookies["authToken"] ? (
-          <Sider style={LeftsiderStyle} width={"24%"}>
-            <Content>
-              <div
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  borderRadius: "20px",
-                  border: "2px solid #A48C59",
-                  overflow: "hidden",
-                  backdropFilter: "blur(8px)",
-                  boxShadow: 'inset 0px 0px 20px #343d4b'
-                }}
-              >
-                <DemoPie />
-              </div>
-            </Content>
-          </Sider>
-        ) : null}
+        <Suspense>
+          {cookies["authToken"] ? (
+            <Sider style={LeftsiderStyle} width={"26%"}>
+              <Content style={LeftSiderContentStyle}>
+                <div
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "20px",
+                    border: "1px solid black",
+                    overflow: "hidden",
+                    backdropFilter: "blur(8px)",
+                    boxShadow: "inset 0px 0px 10px #343d4b",
+                    height: 300,
+                  }}
+                >
+                  <DemoPie />
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: "20px",
+                    border: "1px solid black",
+                    overflow: "hidden",
+                    backdropFilter: "blur(8px)",
+                    boxShadow: "inset 0px 0px 10px #343d4b",
+                    height: 300,
+                  }}
+                >
+                  <DemoLine />
+                </div>
+              </Content>
+            </Sider>
+          ) : null}
+        </Suspense>
 
         <Layout style={LayoutHeaderStyle}>
           <Layout style={LayoutContentStyle}>

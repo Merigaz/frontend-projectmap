@@ -14,8 +14,6 @@ import { SidebarStyle } from "../styles/primaryTheme";
 import { Modal, Button } from 'antd';
 import ComponentForm from "./cForm";
 
-
-
 function ComponentMap() {
 
   const [visible, setVisible] = useState(false);

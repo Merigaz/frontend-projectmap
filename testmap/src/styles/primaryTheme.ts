@@ -24,8 +24,8 @@ export const LeftsiderStyle = {
   zIndex: 999,
   padding: "16px",
   backdropFilter: "blur(5px)",
-  border: "1px",
-  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)"
+  border: "1px solid black",
+  boxShadow: "0 0 15px rgba(0, 0, 0, 0.5)",
 };
 export const LoginContentStyle = {
   height: "100vh",
@@ -54,9 +54,9 @@ export const SidebarStyle = {
   left: "50%",
   transform: "translateX(-50%)",
   borderRadius: "20px",
-  backgroundColor:"#343D4B",
-  width:"16%",
-  display:"flex",
+  backgroundColor: "#343D4B",
+  width: "16%",
+  display: "flex",
   justifyContent: "center",
   alignItems: "center",
 } as React.CSSProperties;
@@ -66,7 +66,7 @@ export const HeaderStyle = {
   justifyContent: "flex-end",
   alignItems: "center",
   boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.5)",
-  };
+};
 export const LayoutFooterStyle = {
   backgroundColor: "transparent",
 };
@@ -76,3 +76,17 @@ export const LayoutHeaderStyle = {
 export const LayoutContentStyle = {
   backgroundColor: "transparent",
 };
+export const LeftSiderContentStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+  alignItems: "center",
+  height: "100%"
+} as React.CSSProperties;
+export const ButtonLoginStyle = {
+  width:"100%"
+}
+export const CardLoginStyle = {
+  border: "1px solid black",
+  boxShadow: "0 0 5px #A48C59"
+}

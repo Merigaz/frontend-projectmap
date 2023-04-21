@@ -1,9 +1,10 @@
 import { Button, Card, Form, Input } from "antd";
-import { EyeInvisibleOutlined, MailOutlined } from "@ant-design/icons";
+import { EyeInvisibleOutlined, LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { ButtonLoginStyle, CardLoginStyle } from "../styles/primaryTheme";
 function FormLogin() {
   const [cookies, setCookie] = useCookies(["authToken"]);
   const [email, setEmail] = useState("");
@@ -38,52 +39,53 @@ function FormLogin() {
     }
   };
   return (
-    <Card bordered={false} style={{}}>
-      <Form
-        layout="vertical"
-        name="basic"
-        labelCol={{ span: 8 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onSubmitCapture={handleSubmit}
-        autoComplete="off"
-      >
-        <Form.Item
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Por favor ingrese su correo electrónico",
-            },
-          ]}
+    <>
+    <Card bordered={false} style={CardLoginStyle}>
+        <Form
+          layout="vertical"
+          name="basic"
+          labelCol={{ span: 8 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onSubmitCapture={handleSubmit}
+          autoComplete="on"
         >
-          <Input
-            placeholder="Correo electrónico"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </Form.Item>
+          <Form.Item
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese su correo electrónico",
+              },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={handleEmailChange} />
+          </Form.Item>
 
-        <Form.Item
-          name="password"
-          rules={[
-            { required: true, message: "Por favor ingrese su contraseña" },
-          ]}
-        >
-          <Input.Password
-            placeholder="Contraseña"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: "Por favor ingrese su contraseña" },
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder="Contraseña"
+              value={password}
+              onChange={handlePasswordChange} />
+          </Form.Item>
 
-        <Form.Item style={{ textAlign: "center" }}>
-          <Button type="primary" htmlType="submit">
-            Iniciar sesión
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+          <Form.Item style={{ textAlign: "center" }}>
+            <Button type="primary" htmlType="submit" style={ButtonLoginStyle}>
+              Iniciar sesión
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card></>
   );
 }
 export default FormLogin;
