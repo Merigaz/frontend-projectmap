@@ -1,6 +1,6 @@
 FROM node:latest as build
 WORKDIR /frontend/frontend-projectmap
-COPY package.json ./ 
+COPY package.json yarn.lock ./ 
 RUN yarn install
 COPY . .
 COPY .env .
