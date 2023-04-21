@@ -5,7 +5,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
 COPY . .
 COPY .env .
-RUN yarn build
+RUN  yarn build --max-old-space-size=4096
 
 
 # Production stage
