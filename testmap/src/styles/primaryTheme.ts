@@ -24,8 +24,9 @@ export const LeftsiderStyle = {
   zIndex: 999,
   padding: "16px",
   backdropFilter: "blur(5px)",
-  border: "1px solid black",
-  boxShadow: "0 0 15px rgba(0, 0, 0, 0.5)",
+  borderLeft: "1px solid black",
+  borderRight: "1px solid black",
+  boxShadow: "0 0 15px rgba(164, 152, 89, 0.5)",
 };
 export const LoginContentStyle = {
   height: "100vh",
@@ -41,6 +42,9 @@ export const LayoutStyle = {
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center center",
   display: "flex",
+  borderTop: "1px solid black",
+  borderRight: "1px solid black",
+  borderBottom: "1px solid black",
 };
 export const ProfileContentStyle = {
   display: "flex",
@@ -48,14 +52,13 @@ export const ProfileContentStyle = {
   alignItems: "center",
 };
 export const SidebarStyle = {
-  backdropFilter: "blur(5px)",
   position: "absolute",
   bottom: "10px",
   left: "50%",
   transform: "translateX(-50%)",
   borderRadius: "20px",
   backgroundColor: "#343D4B",
-  width: "16%",
+  width: "20%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -79,14 +82,15 @@ export const LayoutContentStyle = {
 export const LeftSiderContentStyle = {
   display: "flex",
   flexWrap: "wrap",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  height: "100%"
+  height: "100%",
+  width: "100%",
 } as React.CSSProperties;
 export const ButtonLoginStyle = {
-  width:"100%"
-}
+  width: "100%",
+};
 export const CardLoginStyle = {
   border: "1px solid black",
-  boxShadow: "0 0 5px #A48C59"
-}
+  boxShadow: "0 0 5px #A48C59",
+};

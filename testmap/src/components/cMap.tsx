@@ -2,7 +2,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useQuery } from "react-query";
 import getData from "../hooks/useAxios";
 import { Menu } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
@@ -11,39 +11,36 @@ import {
   ZoomOutOutlined,
 } from "@ant-design/icons";
 import { SidebarStyle } from "../styles/primaryTheme";
-import { Modal, Button } from 'antd';
+import { Modal} from 'antd';
 import ComponentForm from "./cForm";
 
+
 function ComponentMap() {
-
+  const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const { data } = useQuery("markers", getData);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getData();
+      setData(response);
+    }
+    fetchData();
+  }, []);
   const [key, setKey] = useState("Map");
   const onClick: MenuProps["onClick"] = (e) => {
     setKey(e.key.toString());
   };
   const handleForm = () => {
     setVisible(true)
-    console.log(visible)
   }
   const handleZoomIn = () => {
     setZoom((prevZoom) => prevZoom + 1);
   };
   const handleZoomOut = () => {
     setZoom((prevZoom) => prevZoom - 1);
+  };
+  const handleCancel = () => {
+    setVisible(false);
+  
   };
   const [zoom, setZoom] = useState(12);
   const items: MenuProps["items"] = [
@@ -103,7 +100,7 @@ function ComponentMap() {
       <Modal
   title="Registro de direcciones"
   open={visible}
-  onCancel={() => setVisible(false)}
+  onCancel={handleCancel}
   footer={null}
   maskClosable={false}
   width={730}

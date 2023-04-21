@@ -2,8 +2,10 @@ import { Button, Card, DatePicker, Form, Input, Select, InputNumber } from "antd
 import locale from "antd/es/date-picker/locale/es_ES";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ComponentForm() {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -35,10 +37,10 @@ function ComponentForm() {
     };
   
     setLoading(true);
-  
     try {
       await postData(payload);
       form.resetFields();
+      
       console.log("Form submitted successfully");
     } catch (error) {
       console.error("Error submitting form:", error);

@@ -21,7 +21,7 @@ const DemoLine = () => {
     data,
     appendPadding: 20,
     xField: 'name',
-    yField: 'count',
+    yField: 'Ingresos',
     xAxis: {
     
       tickCount: 4,

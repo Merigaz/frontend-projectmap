@@ -1,5 +1,5 @@
 import { Button, Card, Form, Input } from "antd";
-import { EyeInvisibleOutlined, LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
+import {LockOutlined,UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { ButtonLoginStyle, CardLoginStyle } from "../styles/primaryTheme";
 function FormLogin() {
   const [cookies, setCookie] = useCookies(["authToken"]);
+  const [cookiesname, setCookiename] = useCookies(["name"]);
+  const [cookiesisAdmin, setCookieisAdmin] = useCookies(["isAdmin"])
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,17 +23,28 @@ function FormLogin() {
         `${import.meta.env.VITE_BASE_URL}/login`,
         {
           email,
-          password,
+          password
         }
       );
       if (data) {
-        const authToken = "xyz";
-        setCookie("authToken", authToken, {
-          path: "/",
-          sameSite: "none",
-          secure: true,
-        });
-        
+       const authToken = "xyz";
+      const { name, isAdmin } = data;
+    
+      setCookie("authToken", authToken, {
+        path: "/",
+        sameSite: "none",
+        secure: true,
+      });
+      setCookiename("name", name, {
+        path: "/",
+        sameSite: "none",
+        secure: true,
+      });
+      setCookieisAdmin("isAdmin", isAdmin, {
+        path: "/",
+        sameSite: "none",
+        secure: true,
+      });
       }
       console.log(data);
     } catch (error) {

@@ -15,7 +15,7 @@ import Sider from "antd/es/layout/Sider";
 import DemoPie from "../components/chartPie";
 import { Suspense } from "react";
 import DemoLine from "../components/chartLine";
-
+import NavProfile from "../components/dropdownProfile";
 function Main() {
   const [cookies] = useCookies(["authToken"]);
   return (
@@ -50,6 +50,9 @@ function Main() {
                   }}
                 >
                   <DemoLine />
+                </div>
+                <div>
+                  <NavProfile />
                 </div>
               </Content>
             </Sider>
