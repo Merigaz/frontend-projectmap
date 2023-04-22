@@ -1,5 +1,5 @@
 # Build stage
-FROM node:alpine as build
+FROM node:alpine AS build
 WORKDIR /frontend/frontend-projectmap
 COPY package.json yarn.lock ./
 ENV NODE_OPTIONS="--max-old-space-size=1630"
