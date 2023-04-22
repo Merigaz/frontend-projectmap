@@ -6,7 +6,7 @@ ENV NODE_OPTIONS="--max-old-space-size=3200"
 RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
 COPY . .
 COPY .env .
-RUN  yarn build
+RUN  yarn build --verbose
 
 
 # Production stage
