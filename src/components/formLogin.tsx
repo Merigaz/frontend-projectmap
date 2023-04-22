@@ -33,17 +33,14 @@ function FormLogin() {
       setCookie("authToken", authToken, {
         path: "/",
         sameSite: "none",
-        secure: true,
       });
       setCookiename("name", name, {
         path: "/",
         sameSite: "none",
-        secure: true,
       });
       setCookieisAdmin("isAdmin", isAdmin, {
         path: "/",
         sameSite: "none",
-        secure: true,
       });
       }
       console.log(data);
