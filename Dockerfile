@@ -11,7 +11,8 @@ RUN  yarn build
 
 # Production stage
 FROM nginx:1.21.3-alpine
-COPY --from=build /frontend/frontend-projectmap/dist /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
+COPY ./frontend-projectmap/dist/ .
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
