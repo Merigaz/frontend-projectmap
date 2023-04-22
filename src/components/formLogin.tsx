@@ -32,15 +32,15 @@ function FormLogin() {
     
       setCookie("authToken", authToken, {
         path: "/",
-        sameSite: "none",
+        
       });
       setCookiename("name", name, {
         path: "/",
-        sameSite: "none",
+        
       });
       setCookieisAdmin("isAdmin", isAdmin, {
         path: "/",
-        sameSite: "none",
+       
       });
       }
       console.log(data);
