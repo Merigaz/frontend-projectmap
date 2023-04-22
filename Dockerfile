@@ -2,7 +2,7 @@
 FROM node:alpine as build
 WORKDIR /frontend/frontend-projectmap
 COPY package.json yarn.lock ./
-ENV NODE_OPTIONS="--max-old-space-size=612"
+ENV NODE_OPTIONS="--max-old-space-size=1630"
 RUN yarn install --frozen-lockfile --verbose --network-timeout 600000
 COPY . .
 COPY .env .
