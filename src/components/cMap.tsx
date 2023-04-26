@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
+  DatabaseOutlined,
   FormOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
@@ -13,11 +14,12 @@ import {
 import { SidebarStyle } from "../styles/primaryTheme";
 import { Modal} from 'antd';
 import ComponentForm from "./cForm";
-
+import AddressesByNeighborhoods from "./cAddresses";
 
 function ComponentMap() {
   const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   useEffect(() => {
     async function fetchData() {
       const response = await getData();
@@ -40,8 +42,13 @@ function ComponentMap() {
   };
   const handleCancel = () => {
     setVisible(false);
-  
   };
+  const handleAddresses = () => {
+      setVisible2(true)
+    };
+  const handleCancel2 = () => {
+      setVisible2(false);
+    };
   const [zoom, setZoom] = useState(12);
   const items: MenuProps["items"] = [
     {
@@ -62,6 +69,12 @@ function ComponentMap() {
       onClick: handleZoomOut,
       icon: <ZoomOutOutlined />,
     },
+    {
+      label: "",
+      key: "AddressesByNeighborhoods",
+      onClick: handleAddresses,
+      icon: <DatabaseOutlined />,
+    }
   ];
 
   const center = {
@@ -98,15 +111,25 @@ function ComponentMap() {
           ))}
       </GoogleMap>
       <Modal
-  title="Registro de direcciones"
-  open={visible}
-  onCancel={handleCancel}
-  footer={null}
-  maskClosable={false}
-  width={730}
->
-  <ComponentForm/>
-</Modal>
+        title="Registro de direcciones"
+        open={visible}
+        onCancel={handleCancel}
+        footer={null}
+        maskClosable={false}
+        width={730}
+      >
+        <ComponentForm/>
+      </Modal>
+      <Modal
+        title="Vista de direcciones por barrio"
+        open={visible2}
+        onCancel={handleCancel2}
+        footer={null}
+        maskClosable={false}
+        width={730}
+      >
+        <AddressesByNeighborhoods/>
+      </Modal>
     </>
   );
 }
