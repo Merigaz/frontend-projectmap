@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
+  DownloadOutlined,
   FormOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
@@ -15,6 +16,8 @@ import ComponentForm from "./cForm";
 import { useDispatch } from "react-redux";
 import { setNeighborhoodsCount } from "../store/reducers/NeighborhoodsCountReducer";
 import { setDatesCount } from "../store/reducers/DatesCountReducer";
+import AddressesByNeighborhoods from "./cAddresses";
+import TabsForm from "./cTab";
 
 function ComponentMap() {
   const [key, setKey] = useState("Map");
@@ -23,6 +26,7 @@ function ComponentMap() {
   const [zoom, setZoom] = useState(12);
   const dispatch = useDispatch();
 
+  const [visible2, setVisible2] = useState(false);
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,6 +52,12 @@ function ComponentMap() {
   const handleCancel = () => {
     setVisible(false);
   };
+  const handleAddresses = () => {
+    setVisible2(true);
+  };
+  const handleCancel2 = () => {
+    setVisible2(false);
+  };
 
   const items: MenuProps["items"] = [
     {
@@ -55,6 +65,12 @@ function ComponentMap() {
       key: "Form",
       onClick: handleForm,
       icon: <FormOutlined />,
+    },
+    {
+      label: "",
+      key: "AddressesByNeighborhoods",
+      onClick: handleAddresses,
+      icon: <DownloadOutlined />,
     },
     {
       label: "",
@@ -67,7 +83,7 @@ function ComponentMap() {
       key: "ZoomOut",
       onClick: handleZoomOut,
       icon: <ZoomOutOutlined />,
-    },
+    }
   ];
 
   const center = {
@@ -114,6 +130,27 @@ function ComponentMap() {
           <ComponentForm />
         </Modal>
       </GoogleMap>
+      <Modal
+        title="Registro de direcciones"
+        open={visible}
+        onCancel={handleCancel}
+        footer={null}
+        maskClosable={false}
+        width={850}
+      >
+        <TabsForm />
+      </Modal>
+      <Modal
+        title="Descarga de datos"
+        open={visible2}
+        onCancel={handleCancel2}
+        footer={null}
+        maskClosable={false}
+        width={730}
+      >
+        <br />
+        <AddressesByNeighborhoods/>
+      </Modal>
     </>
   );
 }

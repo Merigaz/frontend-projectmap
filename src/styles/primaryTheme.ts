@@ -95,3 +95,10 @@ export const CardLoginStyle = {
   boxShadow: "0 0 5px #A48C59",
   
 };
+export const ButtonDownloadStyle = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignSelf: "center",
+  width: "40%",
+} as React.CSSProperties;
