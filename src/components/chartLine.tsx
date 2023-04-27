@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const DemoLine = () => {
   
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/dates`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const datesCount = useSelector((state:any)=> state.DatesCount);
+  const data = datesCount.DatesCount.map((datesCount: any) => ({
+
+    name: datesCount.name,
+    Ingresos: datesCount.Ingresos,
+  }));
+  
 
   const config = {
     data,

@@ -1,19 +1,15 @@
 import { Pie } from '@ant-design/plots';
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 
 const DemoPie = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/neighborhoods`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+
+  const neighborhoodsCount = useSelector((state:any)=> state.NeighborhoodsCount);
+  const data = neighborhoodsCount.NeighborhoodsCount.map((neighborhoodsCount: any) => ({
+
+    name: neighborhoodsCount.name,
+    count: neighborhoodsCount.count
+  }));
+  
 
   const config = {
     appendPadding: 20,
@@ -21,9 +17,7 @@ const DemoPie = () => {
     angleField: 'count',
     colorField: 'name',
     radius: 1,
-    legend: {
-      position: 'left' as const,
-    },
+    legend: false as const,
     startAngle: Math.PI,
     endAngle: Math.PI * 1.5,
     label: {

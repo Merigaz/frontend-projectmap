@@ -3,6 +3,7 @@ import { ProfileContentStyle } from "../styles/primaryTheme";
 import { Outlet } from "react-router-dom";
 import { LoadScript } from "@react-google-maps/api";
 import { Suspense } from "react";
+import ComponentMap from "../components/cMap";
 
 
 
@@ -12,7 +13,7 @@ function Profile() {
       <Content style={ProfileContentStyle}>
         <LoadScript googleMapsApiKey={import.meta.env.VITE_API_KEY}>
           <Suspense>
-            <Outlet />
+           <ComponentMap/>
           </Suspense>
         </LoadScript>
       </Content>

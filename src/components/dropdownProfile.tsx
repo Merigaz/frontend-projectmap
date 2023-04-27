@@ -27,8 +27,8 @@ function NavProfile() {
   };
   return (
     <>
-      <Dropdown menu={menuProps} placement="bottom">
-      <Button  icon={<UserOutlined />}>
+      <Dropdown menu={menuProps} placement="bottom"  >
+      <Button  icon={<UserOutlined />} >
       {`${cookies.name}`}
       </Button>
     </Dropdown>

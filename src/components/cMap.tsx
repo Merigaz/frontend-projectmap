@@ -1,6 +1,5 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useQuery } from "react-query";
-import getData from "../hooks/useAxios";
+import { getData, getDataDates, getDataNeighborhood } from "../hooks/useAxios";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
@@ -11,27 +10,35 @@ import {
   ZoomOutOutlined,
 } from "@ant-design/icons";
 import { SidebarStyle } from "../styles/primaryTheme";
-import { Modal} from 'antd';
+import { Modal } from "antd";
 import ComponentForm from "./cForm";
-
+import { useDispatch } from "react-redux";
+import { setNeighborhoodsCount } from "../store/reducers/NeighborhoodsCountReducer";
+import { setDatesCount } from "../store/reducers/DatesCountReducer";
 
 function ComponentMap() {
+  const [key, setKey] = useState("Map");
   const [data, setData] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [zoom, setZoom] = useState(12);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    async function fetchData() {
-      const response = await getData();
-      setData(response);
-    }
     fetchData();
   }, []);
-  const [key, setKey] = useState("Map");
-  const onClick: MenuProps["onClick"] = (e) => {
-    setKey(e.key.toString());
-  };
-  const handleForm = () => {
-    setVisible(true)
+
+  async function fetchData() {
+    const response = await getData();
+    const response2 = await getDataNeighborhood();
+    const response3 = await getDataDates();
+    dispatch(setNeighborhoodsCount(response2));
+    dispatch(setDatesCount(response3));
+    setData(response);
   }
+
+  const handleForm = () => {
+    setVisible(true);
+  };
   const handleZoomIn = () => {
     setZoom((prevZoom) => prevZoom + 1);
   };
@@ -40,9 +47,8 @@ function ComponentMap() {
   };
   const handleCancel = () => {
     setVisible(false);
-  
   };
-  const [zoom, setZoom] = useState(12);
+
   const items: MenuProps["items"] = [
     {
       label: "",
@@ -96,17 +102,18 @@ function ComponentMap() {
               title={marker.name}
             />
           ))}
+        <Modal
+          afterClose={fetchData}
+          title="Registro de direcciones"
+          open={visible}
+          onCancel={handleCancel}
+          footer={null}
+          maskClosable={false}
+          width={730}
+        >
+          <ComponentForm />
+        </Modal>
       </GoogleMap>
-      <Modal
-  title="Registro de direcciones"
-  open={visible}
-  onCancel={handleCancel}
-  footer={null}
-  maskClosable={false}
-  width={730}
->
-  <ComponentForm/>
-</Modal>
     </>
   );
 }

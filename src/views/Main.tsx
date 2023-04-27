@@ -1,13 +1,12 @@
-import { Avatar, Layout } from "antd";
+import { Layout } from "antd";
 import {
-  HeaderStyle,
   LayoutContentStyle,
   LayoutHeaderStyle,
   LayoutStyle,
   LeftSiderContentStyle,
   LeftsiderStyle,
 } from "../styles/primaryTheme";
-import { Content, Header } from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import { useCookies } from "react-cookie";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -16,6 +15,7 @@ import DemoPie from "../components/chartPie";
 import { Suspense } from "react";
 import DemoLine from "../components/chartLine";
 import NavProfile from "../components/dropdownProfile";
+
 function Main() {
   const [cookies] = useCookies(["authToken"]);
   return (
@@ -34,6 +34,7 @@ function Main() {
                     backdropFilter: "blur(8px)",
                     boxShadow: "inset 0px 0px 10px #343d4b",
                     height: 300,
+                    width: "80%"
                   }}
                 >
                   <DemoPie />
@@ -47,6 +48,7 @@ function Main() {
                     backdropFilter: "blur(8px)",
                     boxShadow: "inset 0px 0px 10px #343d4b",
                     height: 300,
+                    width: "80%"
                   }}
                 >
                   <DemoLine />

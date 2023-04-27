@@ -81,11 +81,11 @@ export const LayoutContentStyle = {
 };
 export const LeftSiderContentStyle = {
   display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
+  flexDirection: "column",
+  justifyContent: "space-around",
   alignItems: "center",
   height: "100%",
-  width: "100%",
+  width: "auto",
 } as React.CSSProperties;
 export const ButtonLoginStyle = {
   width: "100%",
@@ -93,4 +93,5 @@ export const ButtonLoginStyle = {
 export const CardLoginStyle = {
   border: "1px solid black",
   boxShadow: "0 0 5px #A48C59",
+  
 };
