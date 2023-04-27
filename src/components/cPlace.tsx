@@ -1,12 +1,9 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Button, Card, DatePicker, Form, Input, Select, Modal } from "antd";
-import locale from "antd/es/date-picker/locale/es_ES";
+import { Button, Card, Form, Input, Modal, Select } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function ComponentForm() {
-  const navigate = useNavigate();
+function ComponentFormPlace() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
@@ -42,7 +39,6 @@ function ComponentForm() {
       instance.destroy();
     }, secondsToGo * 1000);
   };
-
   const [modalError, contextHolderError] = Modal.useModal();
   const errorModal = (message) => {
     let secondsToGo = 4;
@@ -65,7 +61,7 @@ function ComponentForm() {
       instance.destroy();
     }, secondsToGo * 1000);
   };
-
+  
   const onFinish = async (values: any) => {
     const markerAddress = `${formValues.select1}${formValues.input1}${formValues.select2}#${formValues.select3}${formValues.input3}${formValues.select4}-${formValues.input5}`
 
@@ -74,10 +70,9 @@ function ComponentForm() {
     const payload = {
       ...values,
       address: address,
-      markerAddress: markerAddress,
-      date: values.date.format("YYYYMMD"),
+      markerAddress: markerAddress
     };
-  
+
     setLoading(true);
     try {
       await postData(payload);
@@ -85,7 +80,7 @@ function ComponentForm() {
       countDown()
       console.log("Form submitted successfully");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error subiendo datos:", error);
       errorModal(error.response.data.mensaje)
     } finally {
       setLoading(false);
@@ -97,7 +92,7 @@ function ComponentForm() {
   const postData = async (payload: any) => {
     console.log(payload)
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/submitform`,
+      `${import.meta.env.VITE_BASE_URL}/submitplace`,
       payload
     );
     return response.data;
@@ -106,21 +101,11 @@ function ComponentForm() {
     <>
       <Card style={{ borderRadius: 20 }}>
         <Form onFinish={onFinish} name="form" form={form}>
-          <Form.Item label="Nombre" name="name"
+          <Form.Item label="Lugar" name="name"
             rules={[
               {
                 required: true,
-                message: "Por favor ingrese el nombre",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label="Cédula" name="id"
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese la cédula",
+                message: "Por favor ingrese el nombre del lugar de votación",
               },
             ]}
           >
@@ -208,26 +193,7 @@ function ComponentForm() {
     />
   </div>
           </Form.Item>
-          <Form.Item label="Barrio" name="neighborhood"
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese el nombre del barrio",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item label="Fecha de ingreso" name="date"
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese la fecha",
-              },
-            ]}
-          >
-            <DatePicker locale={locale} format="YYYY-MM-DD" />
-          </Form.Item>
+          <br />
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
               Enviar
@@ -241,4 +207,4 @@ function ComponentForm() {
   );
 }
 
-export default ComponentForm;
+export default ComponentFormPlace;

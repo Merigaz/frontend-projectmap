@@ -7,6 +7,7 @@ import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
   DatabaseOutlined,
+  DownloadOutlined,
   FormOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
@@ -15,6 +16,7 @@ import { SidebarStyle } from "../styles/primaryTheme";
 import { Modal} from 'antd';
 import ComponentForm from "./cForm";
 import AddressesByNeighborhoods from "./cAddresses";
+import TabsForm from "./cTab";
 
 function ComponentMap() {
   const [data, setData] = useState([]);
@@ -44,11 +46,11 @@ function ComponentMap() {
     setVisible(false);
   };
   const handleAddresses = () => {
-      setVisible2(true)
-    };
+    setVisible2(true);
+  };
   const handleCancel2 = () => {
-      setVisible2(false);
-    };
+    setVisible2(false);
+  };
   const [zoom, setZoom] = useState(12);
   const items: MenuProps["items"] = [
     {
@@ -56,6 +58,12 @@ function ComponentMap() {
       key: "Form",
       onClick: handleForm,
       icon: <FormOutlined />,
+    },
+    {
+      label: "",
+      key: "AddressesByNeighborhoods",
+      onClick: handleAddresses,
+      icon: <DownloadOutlined />,
     },
     {
       label: "",
@@ -68,12 +76,6 @@ function ComponentMap() {
       key: "ZoomOut",
       onClick: handleZoomOut,
       icon: <ZoomOutOutlined />,
-    },
-    {
-      label: "",
-      key: "AddressesByNeighborhoods",
-      onClick: handleAddresses,
-      icon: <DatabaseOutlined />,
     }
   ];
 
@@ -116,18 +118,19 @@ function ComponentMap() {
         onCancel={handleCancel}
         footer={null}
         maskClosable={false}
-        width={730}
+        width={850}
       >
-        <ComponentForm/>
+        <TabsForm />
       </Modal>
       <Modal
-        title="Vista de direcciones por barrio"
+        title="Descarga de datos"
         open={visible2}
         onCancel={handleCancel2}
         footer={null}
         maskClosable={false}
         width={730}
       >
+        <br />
         <AddressesByNeighborhoods/>
       </Modal>
     </>
