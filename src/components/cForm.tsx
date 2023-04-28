@@ -44,7 +44,7 @@ function ComponentForm() {
   };
 
   const [modalError, contextHolderError] = Modal.useModal();
-  const errorModal = (message) => {
+  const errorModal = (message:any) => {
     let secondsToGo = 4;
 
     const instance = modalError.success({
@@ -75,7 +75,7 @@ function ComponentForm() {
       ...values,
       address: address,
       markerAddress: markerAddress,
-      date: values.date.format("YYYYMMD"),
+      date: values.date.format("D-M-YY"),
     };
   
     setLoading(true);
@@ -84,7 +84,7 @@ function ComponentForm() {
       form.resetFields();
       countDown()
       console.log("Form submitted successfully");
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error submitting form:", error);
       errorModal(error.response.data.mensaje)
     } finally {
