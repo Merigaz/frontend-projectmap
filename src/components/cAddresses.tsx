@@ -56,7 +56,7 @@ const AddressesByNeighborhoods = () => {
       );
       //Arregla el array
       const newData = data.map(
-        ({ _id, name, id, address, neighborhood, date }) => ({
+        ({ _id, name, id, address, neighborhood, date }:{ _id: any, name: string, id: number, address: string, neighborhood: string, date: Date }) => ({
           NOMBRE: name,
           CÉDULA: id,
           DIRECCIÓN: address,

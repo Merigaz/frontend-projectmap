@@ -7,6 +7,7 @@ import type { MenuProps } from "antd";
 import {
   DownloadOutlined,
   FormOutlined,
+  UserOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
 } from "@ant-design/icons";
@@ -59,6 +60,12 @@ function ComponentMap() {
     setVisible2(false);
   };
 
+  const iconid = {
+    url: `http://hluapp.com/icon/user.png` ,
+    scaledSize: new window.google.maps.Size(50, 50),
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15)
+  };
   const items: MenuProps["items"] = [
     {
       label: "",
@@ -116,6 +123,7 @@ function ComponentMap() {
               key={marker._id}
               position={{ lat: marker.lat, lng: marker.lng }}
               title={marker.name}
+              icon={iconid}
             />
           ))}
         <Modal
