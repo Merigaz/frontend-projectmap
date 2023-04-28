@@ -10,6 +10,7 @@ interface Address {
   Nombre: string;
   CC: string;
   Dirección: string;
+  InfoAdicional: string;
   Fecha: string;
 }
 
@@ -56,10 +57,11 @@ const AddressesByNeighborhoods = () => {
       );
       //Arregla el array
       const newData = data.map(
-        ({ _id, name, id, address, neighborhood, date }:{ _id: any, name: string, id: number, address: string, neighborhood: string, date: Date }) => ({
+        ({ _id, name, id, address, optional, neighborhood, date }:{ _id: any, name: string, id: number, address: string, neighborhood: string, date: Date }) => ({
           NOMBRE: name,
           CÉDULA: id,
           DIRECCIÓN: address,
+          INFOADICIONAL: optional,
           BARRIO: neighborhood,
           FECHA: date,
         })
@@ -117,6 +119,7 @@ const AddressesByNeighborhoods = () => {
                 <p>Nombre: {address.Nombre}</p>
                 <p>CC: {address.CC}</p>
                 <p>Dirección: {address.Dirección}</p>
+                <p>{address.InfoAdicional}</p>
                 <p>Fecha: {address.Fecha}</p>
                 {index < addressData.datos.length - 1 && <hr />}
               </div>

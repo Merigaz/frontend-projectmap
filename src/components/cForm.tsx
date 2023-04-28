@@ -208,6 +208,15 @@ function ComponentForm() {
     />
   </div>
           </Form.Item>
+          <Form.Item label="Opcional" name="optional"
+            rules={[
+              {
+                required: false,
+              },
+            ]}
+          >
+            <Input placeholder="Conjunto residencial Villa Linda, Apto 201, Piso 2"/>
+          </Form.Item>
           <Form.Item label="Barrio" name="neighborhood"
             rules={[
               {
