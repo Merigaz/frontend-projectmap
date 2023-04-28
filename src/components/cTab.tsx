@@ -23,7 +23,7 @@ const items: TabsProps['items'] = [
 
 function TabsForm() {
   return (
-    <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+    <Tabs items={items} onChange={onChange} />
   )
 }
 

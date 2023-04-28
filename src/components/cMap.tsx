@@ -159,19 +159,9 @@ function ComponentMap() {
               icon={iconplaces}
             />
           ))}
-        <Modal
-          afterClose={fetchData}
-          title="Registro de direcciones"
-          open={visible}
-          onCancel={handleCancel}
-          footer={null}
-          maskClosable={false}
-          width={730}
-        >
-          <ComponentForm />
-        </Modal>
       </GoogleMap>
       <Modal
+        afterClose={fetchData}
         title="Registro de direcciones"
         open={visible}
         onCancel={handleCancel}
