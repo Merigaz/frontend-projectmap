@@ -28,3 +28,15 @@ export async function getDataDates() {
   );
   return response.data;
 };
+export async function getDataPlaces() {
+  const response = await axios.get(
+    `${import.meta.env.VITE_BASE_URL}/submitplace`
+  );
+  return response.data;
+};
+export async function getDatalatlng() {
+  const response = await axios.get(
+    `${import.meta.env.VITE_BASE_URL}/latlng`
+  );
+  return response.data;
+};

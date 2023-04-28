@@ -1,5 +1,11 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import { getData, getDataDates, getDataNeighborhood } from "../hooks/useAxios";
+import {
+  getData,
+  getDataDates,
+  getDataNeighborhood,
+  getDataPlaces,
+  getDatalatlng,
+} from "../hooks/useAxios";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
@@ -7,7 +13,6 @@ import type { MenuProps } from "antd";
 import {
   DownloadOutlined,
   FormOutlined,
-  UserOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
 } from "@ant-design/icons";
@@ -23,6 +28,7 @@ import TabsForm from "./cTab";
 function ComponentMap() {
   const [key, setKey] = useState("Map");
   const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(12);
   const dispatch = useDispatch();
@@ -33,12 +39,14 @@ function ComponentMap() {
   }, []);
 
   async function fetchData() {
-    const response = await getData();
+    const response = await getDatalatlng();
     const response2 = await getDataNeighborhood();
     const response3 = await getDataDates();
+    const response4 = await getDataPlaces();
+    setData(response);
     dispatch(setNeighborhoodsCount(response2));
     dispatch(setDatesCount(response3));
-    setData(response);
+    setData2(response4);
   }
 
   const handleForm = () => {
@@ -61,10 +69,17 @@ function ComponentMap() {
   };
 
   const iconid = {
-    url: `http://hluapp.com/icon/user.png` ,
-    scaledSize: new window.google.maps.Size(50, 50),
+    url: `http://hluapp.com/icon/user.png`,
+    scaledSize: new window.google.maps.Size(56, 86),
     origin: new window.google.maps.Point(0, 0),
-    anchor: new window.google.maps.Point(15, 15)
+    anchor: new window.google.maps.Point(15, 15),
+    labelOrigin: new google.maps.Point(28, 68)
+  };
+  const iconplaces = {
+    url: `http://hluapp.com/icon/vote.png`,
+    scaledSize: new window.google.maps.Size(46, 46),
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15),
   };
   const items: MenuProps["items"] = [
     {
@@ -90,7 +105,7 @@ function ComponentMap() {
       key: "ZoomOut",
       onClick: handleZoomOut,
       icon: <ZoomOutOutlined />,
-    }
+    },
   ];
 
   const center = {
@@ -122,8 +137,26 @@ function ComponentMap() {
             <Marker
               key={marker._id}
               position={{ lat: marker.lat, lng: marker.lng }}
-              title={marker.name}
+              title={marker.address}
               icon={iconid}
+              options={{
+                label: {
+                  text: marker.count.toString(),
+                  color: "#B4AB6F",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }
+              }}
+            
+            />
+          ))}
+        {data2 &&
+          data2.map((marker: any) => (
+            <Marker
+              key={marker._id}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              title={marker.name}
+              icon={iconplaces}
             />
           ))}
         <Modal
@@ -157,7 +190,7 @@ function ComponentMap() {
         width={730}
       >
         <br />
-        <AddressesByNeighborhoods/>
+        <AddressesByNeighborhoods />
       </Modal>
     </>
   );

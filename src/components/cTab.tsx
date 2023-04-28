@@ -2,7 +2,7 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import ComponentForm from './cForm';
 import ComponentFormPlace from './cPlace';
-import { HomeOutlined, IdcardOutlined } from '@ant-design/icons';
+import {IdcardOutlined, SolutionOutlined } from '@ant-design/icons';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -16,7 +16,7 @@ const items: TabsProps['items'] = [
   },
   {
     key: '2',
-    label: <span><HomeOutlined />Lugares de votación</span>,
+    label: <span><SolutionOutlined />Lugares de votación</span>,
     children: <ComponentFormPlace />,
   }
 ];
