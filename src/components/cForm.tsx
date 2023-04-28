@@ -75,7 +75,7 @@ function ComponentForm() {
       ...values,
       address: address,
       markerAddress: markerAddress,
-      date: values.date.format("YYYYMMD"),
+      date: values.date.format("YYYY-MM-D"),
     };
   
     setLoading(true);
