@@ -112,6 +112,12 @@ function ComponentMap() {
     lat: 10.9632,
     lng: -74.7964,
   };
+  const bounds = {
+    north: 11.061911,
+    south: 10.892518,
+    east: -74.725747,
+    west: -74.886714
+  };
 
   return (
     <>
@@ -124,6 +130,10 @@ function ComponentMap() {
           streetViewControl: false,
           mapTypeControl: false,
           disableDefaultUI: true,
+          restriction: {
+            latLngBounds: bounds
+          },
+
         }}
       >
         <Menu
