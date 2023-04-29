@@ -18,12 +18,13 @@ import {
 } from "@ant-design/icons";
 import { SidebarStyle } from "../styles/primaryTheme";
 import { Modal } from "antd";
-import ComponentForm from "./cForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setNeighborhoodsCount } from "../store/reducers/NeighborhoodsCountReducer";
 import { setDatesCount } from "../store/reducers/DatesCountReducer";
 import AddressesByNeighborhoods from "./cAddresses";
 import TabsForm from "./cTab";
+import CheckboxMenu from "./cCheckbox";
+import { setMarkersMap } from "../store/reducers/MarkersMapReducer";
 
 function ComponentMap() {
   const [key, setKey] = useState("Map");
@@ -46,6 +47,7 @@ function ComponentMap() {
     setData(response);
     dispatch(setNeighborhoodsCount(response2));
     dispatch(setDatesCount(response3));
+    dispatch(setMarkersMap(response));
     setData2(response4);
   }
 
@@ -73,7 +75,7 @@ function ComponentMap() {
     scaledSize: new window.google.maps.Size(56, 86),
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
-    labelOrigin: new google.maps.Point(28, 68)
+    labelOrigin: new google.maps.Point(28, 68),
   };
   const iconplaces = {
     url: `http://hluapp.com/icon/vote.png`,
@@ -116,8 +118,12 @@ function ComponentMap() {
     north: 11.061911,
     south: 10.892518,
     east: -74.725747,
-    west: -74.886714
-  };
+    west: -74.886714,
+  };
+  let i = 0;
+  let j = 0;
+  const { NameMarkers } = useSelector((state: any) => state.NameMarkers);
+  const markersToShow = NameMarkers;
 
   return (
     <>
@@ -131,9 +137,8 @@ function ComponentMap() {
           mapTypeControl: false,
           disableDefaultUI: true,
           restriction: {
-            latLngBounds: bounds
-          },
-
+            latLngBounds: bounds,
+          },
         }}
       >
         <Menu
@@ -143,33 +148,53 @@ function ComponentMap() {
           style={SidebarStyle}
         />
         {data &&
-          data.map((marker: any) => (
-            <Marker
-              key={marker._id}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              title={marker.address}
-              icon={iconid}
-              options={{
-                label: {
-                  text: marker.count.toString(),
-                  color: "#B4AB6F",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }
-              }}
-            
-            />
-          ))}
+          (markersToShow.length === 0
+            ? data.map((marker: any) => (
+                <Marker
+                  key={(i = i + 2)}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  title={marker.address}
+                  icon={iconid}
+                  options={{
+                    label: {
+                      text: marker.count.toString(),
+                      color: "#B4AB6F",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+              ))
+            : data.map((marker: any) =>
+                markersToShow.includes(marker.neighborhood) ? (
+                  <Marker
+                    key={(i = i + 2)}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    title={marker.address}
+                    icon={iconid}
+                    options={{
+                      label: {
+                        text: marker.count.toString(),
+                        color: "#B4AB6F",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                      },
+                    }}
+                  />
+                ) : null
+              ))}
         {data2 &&
           data2.map((marker: any) => (
             <Marker
-              key={marker._id}
+              key={(j = j + 2)}
               position={{ lat: marker.lat, lng: marker.lng }}
               title={marker.name}
               icon={iconplaces}
             />
           ))}
+        <CheckboxMenu />
       </GoogleMap>
+
       <Modal
         afterClose={fetchData}
         title="Registro de direcciones"

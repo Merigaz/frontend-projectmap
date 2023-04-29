@@ -3,6 +3,7 @@ import Bgimg from "../assets/LayoutBGimg.png";
 export const primaryTheme = {
   colorPrimary: "#A48C59",
   colorPrimaryText: "#fcc501",
+  colorText:"#343D4B"
 };
 
 export const componentsPrimaryTheme = {
@@ -102,3 +103,13 @@ export const ButtonDownloadStyle = {
   alignSelf: "center",
   width: "40%",
 } as React.CSSProperties;
+
+export const CheckboxGroupStyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  gap: "8px", 
+  padding: "20px",
+  width:"auto",
+  heigth:"auto",
+} as React.CSSProperties;  

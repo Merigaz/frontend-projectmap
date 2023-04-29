@@ -40,7 +40,7 @@ function ComponentFormPlace() {
     }, secondsToGo * 1000);
   };
   const [modalError, contextHolderError] = Modal.useModal();
-  const errorModal = (message) => {
+  const errorModal = (message:any) => {
     let secondsToGo = 4;
 
     const instance = modalError.success({
@@ -79,7 +79,7 @@ function ComponentFormPlace() {
       form.resetFields();
       countDown()
       console.log("Form submitted successfully");
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error subiendo datos:", error);
       errorModal(error.response.data.mensaje)
     } finally {
