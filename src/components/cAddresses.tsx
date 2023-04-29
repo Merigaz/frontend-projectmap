@@ -71,7 +71,12 @@ useEffect(() => {
       const wb = XLSX.utils.book_new();
       const ws = XLSX.utils.json_to_sheet(newData);
       XLSX.utils.book_append_sheet(wb, ws, "Direcciones");
-      XLSX.writeFile(wb, "Barrios.xlsx");
+      const fechaActual = new Date();
+      const dia = fechaActual.getDate();
+      const mes = fechaActual.getMonth() + 1;
+      const anio = fechaActual.getFullYear();
+      const fechaFormateada = `${dia < 10 ? '0' : ''}${dia} ${mes < 10 ? '0' : ''}${mes} ${anio}`;
+      XLSX.writeFile(wb, `Barrios-${fechaFormateada}.xlsx`);
     } catch (error) {
       console.log(error);
     }

@@ -62,9 +62,7 @@ function FormLogin() {
         
       });
       setCookieisAdmin("isAdmin", isAdmin, {
-        path: "/",
-        sameSite: "none",
-        secure: false,
+        path: "/"
       });
       }
       console.log(data);
