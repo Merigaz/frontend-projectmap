@@ -16,6 +16,7 @@ import { Suspense, useState } from "react";
 import DemoLine from "../components/chartLine";
 import NavProfile from "../components/dropdownProfile";
 import DemoPie2 from "../components/chartPie2";
+import DemoLine2 from "../components/charLine2";
 
 function Main() {
 
@@ -110,6 +111,7 @@ function Main() {
         maskClosable={false}
         width={850}
       >
+        <DemoLine2 />
       </Modal>
     </>
   );
