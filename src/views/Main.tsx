@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Layout, Modal } from "antd";
 import {
   LayoutContentStyle,
   LayoutHeaderStyle,
@@ -12,12 +12,29 @@ import Login from "./Login";
 import Profile from "./Profile";
 import Sider from "antd/es/layout/Sider";
 import DemoPie from "../components/chartPie";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import DemoLine from "../components/chartLine";
 import NavProfile from "../components/dropdownProfile";
+import DemoPie2 from "../components/chartPie2";
 
 function Main() {
+
   const [cookies] = useCookies(["authToken"]);
+  const [visible, setVisible] = useState(false);
+  const handleModal = () => {
+    setVisible(true);
+  };
+  const handleCancel = () => {
+    setVisible(false);
+    console.log("cierrate")
+  };
+  const [visible2, setVisible2] = useState(false);
+  const handleModal2 = () => {
+    setVisible2(true);
+  };
+  const handleCancel2 = () => {
+    setVisible2(false);
+  };
   return (
     <>
       <Layout style={LayoutStyle}>
@@ -26,6 +43,7 @@ function Main() {
             <Sider style={LeftsiderStyle} width={"26%"}>
               <Content style={LeftSiderContentStyle}>
                 <div
+                  onClick={handleModal2}
                   style={{
                     backgroundColor: "#FFFFFF",
                     borderRadius: "20px",
@@ -40,6 +58,7 @@ function Main() {
                   <DemoPie />
                 </div>
                 <div
+                  onClick={handleModal}
                   style={{
                     backgroundColor: "#FFFFFF",
                     borderRadius: "20px",
@@ -73,6 +92,25 @@ function Main() {
           </Layout>
         </Layout>
       </Layout>
+      <Modal
+        title="Cantidad de registros por barrio"
+        open={visible2}
+        onCancel={handleCancel2}
+        footer={null}
+        maskClosable={false}
+        width={850}
+      >
+        <DemoPie2 />
+      </Modal>
+      <Modal
+        title="Cantidad de registros por fecha"
+        open={visible}
+        onCancel={handleCancel}
+        footer={null}
+        maskClosable={false}
+        width={850}
+      >
+      </Modal>
     </>
   );
 }
