@@ -36,7 +36,7 @@ function ComponentMap() {
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [zoom, setZoom] = useState(12);
+  const [zoom, setZoom] = useState(13);
   const dispatch = useDispatch();
   const [cookies] = useCookies(["name"]);
   const [, , removeCookie] = useCookies(["authToken"]);
