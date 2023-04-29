@@ -1,5 +1,5 @@
-import { Button, Card, Form, Input } from "antd";
-import {LockOutlined,UserOutlined } from "@ant-design/icons";
+import { Button, Card, Form, Input, Modal } from "antd";
+import {ExclamationCircleOutlined, LockOutlined,UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -15,6 +15,28 @@ function FormLogin() {
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
   const navigate = useNavigate();
+  const [modalError, contextHolderError] = Modal.useModal();
+  const errorModal = (message:any) => {
+    let secondsToGo = 4;
+
+    const instance = modalError.success({
+      title: 'No se pudo iniciar sesión',
+      icon: <ExclamationCircleOutlined style={{ color: 'red' }}/>,
+      content: message,
+    });
+
+    const timer = setInterval(() => {
+      secondsToGo -= 1;
+/*       instance.update({
+        content: `This modal will be destroyed after ${secondsToGo} second.`,
+      }); */
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      instance.destroy();
+    }, secondsToGo * 1000);
+  };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -44,8 +66,9 @@ function FormLogin() {
       });
       }
       console.log(data);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error(error.response.data.message);
+      errorModal(error.response.data.message)
     }
   };
   return (
@@ -93,6 +116,7 @@ function FormLogin() {
             <Button type="primary" htmlType="submit" style={ButtonLoginStyle}>
               Iniciar sesión
             </Button>
+            {contextHolderError}
           </Form.Item>
         </Form>
       </Card></>

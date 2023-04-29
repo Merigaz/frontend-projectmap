@@ -86,7 +86,7 @@ function ComponentForm() {
       console.log("Form submitted successfully");
     } catch (error:any) {
       console.error("Error submitting form:", error);
-      errorModal(error.response.data.mensaje)
+      errorModal(error.response.data.message)
     } finally {
       setLoading(false);
 
