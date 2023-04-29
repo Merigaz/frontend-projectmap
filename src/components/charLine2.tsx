@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Line } from '@ant-design/plots';
+import { useSelector } from 'react-redux';
 
 const DemoLine2 = () => {
-  const [data, setData] = useState([]);
+/*   const [data, setData] = useState([]);
 
   useEffect(() => {
     asyncFetch();
@@ -16,12 +17,18 @@ const DemoLine2 = () => {
       .catch((error) => {
         console.log('fetch data failed', error);
       });
-  };
+  }; */
+  const datesCount = useSelector((state:any)=> state.DatesCount);
+  const data = datesCount.DatesCount.map((datesCount: any) => ({
+
+    name: datesCount.name,
+    Ingresos: datesCount.Ingresos,
+  }));
   const config = {
     data,
     padding: 'auto',
-    xField: 'Date',
-    yField: 'scales',
+    xField: 'name',
+    yField: 'Ingresos',
     xAxis: {
       tickCount: 5,
     },
