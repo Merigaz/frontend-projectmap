@@ -63,7 +63,7 @@ const DemoPie2 = () => {
         },
       },
       content: {
-        offsetY: 4,
+        offsetY: 0,
         style: {
           fontSize: '32px',
         },

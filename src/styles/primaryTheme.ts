@@ -3,7 +3,7 @@ import Bgimg from "../assets/LayoutBGimg.png";
 export const primaryTheme = {
   colorPrimary: "#A48C59",
   colorPrimaryText: "#fcc501",
-  colorText:"#343D4B"
+  colorText: "#343D4B",
 };
 
 export const componentsPrimaryTheme = {
@@ -24,10 +24,6 @@ export const LeftsiderStyle = {
   left: 0,
   zIndex: 999,
   padding: "16px",
-  backdropFilter: "blur(5px)",
-  borderLeft: "1px solid black",
-  borderRight: "1px solid black",
-  boxShadow: "0 0 15px rgba(164, 152, 89, 0.5)",
 };
 export const LoginContentStyle = {
   height: "100vh",
@@ -59,6 +55,7 @@ export const SidebarStyle = {
   transform: "translateX(-50%)",
   borderRadius: "20px",
   backgroundColor: "#343D4B",
+  border:"1px solid #343D4B",
   width: "30%",
   display: "flex",
   justifyContent: "center",
@@ -87,14 +84,17 @@ export const LeftSiderContentStyle = {
   alignItems: "center",
   height: "100%",
   width: "auto",
+  borderRadius: "20px",
+  backdropFilter: "blur(5px)",
+  border: "1px solid #A49859",
+  boxShadow: " 0 0 10px rgba(0, 0, 0, 0.8)"
 } as React.CSSProperties;
 export const ButtonLoginStyle = {
   width: "100%",
 };
 export const CardLoginStyle = {
-  border: "1px solid black",
+  border: "1px solid #A49859",
   boxShadow: "0 0 5px #A48C59",
-  
 };
 export const ButtonDownloadStyle = {
   display: "flex",
@@ -108,8 +108,10 @@ export const CheckboxGroupStyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  gap: "8px", 
+  border:"1px solid #A48C59",
+  borderRadius: "20px",
+  gap: "8px",
   padding: "20px",
-  width:"auto",
-  heigth:"auto",
-} as React.CSSProperties;  
+  width: "auto",
+  heigth: "auto",
+} as React.CSSProperties;

@@ -11,8 +11,11 @@ import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
 import {
+  CloudDownloadOutlined,
+  ContactsOutlined,
   DownloadOutlined,
   FormOutlined,
+  UserOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
 } from "@ant-design/icons";
@@ -25,6 +28,8 @@ import AddressesByNeighborhoods from "./cAddresses";
 import TabsForm from "./cTab";
 import CheckboxMenu from "./cCheckbox";
 import { setMarkersMap } from "../store/reducers/MarkersMapReducer";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function ComponentMap() {
   const [key, setKey] = useState("Map");
@@ -33,7 +38,13 @@ function ComponentMap() {
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(12);
   const dispatch = useDispatch();
-
+  const [cookies] = useCookies(["name"]);
+  const [, , removeCookie] = useCookies(["authToken"]);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    removeCookie("authToken", { path: "/" });
+    navigate("/");
+  };
   const [visible2, setVisible2] = useState(false);
   useEffect(() => {
     fetchData();
@@ -69,6 +80,9 @@ function ComponentMap() {
   const handleCancel2 = () => {
     setVisible2(false);
   };
+  const handleRedirect = () => {
+    window.open("https://wsp.registraduria.gov.co/censo/consultar", "_blank");
+  };
 
   const iconid = {
     url: `http://hluapp.com/icon/user.png`,
@@ -86,18 +100,6 @@ function ComponentMap() {
   const items: MenuProps["items"] = [
     {
       label: "",
-      key: "Form",
-      onClick: handleForm,
-      icon: <FormOutlined />,
-    },
-    {
-      label: "",
-      key: "AddressesByNeighborhoods",
-      onClick: handleAddresses,
-      icon: <DownloadOutlined />,
-    },
-    {
-      label: "",
       key: "ZoomIn",
       onClick: handleZoomIn,
       icon: <ZoomInOutlined />,
@@ -107,6 +109,37 @@ function ComponentMap() {
       key: "ZoomOut",
       onClick: handleZoomOut,
       icon: <ZoomOutOutlined />,
+    },
+    {
+      label: "",
+      key: "Form",
+      onClick: handleForm,
+      icon: <FormOutlined />,
+    },
+    {
+      label: "",
+      key: "AddressesByNeighborhoods",
+      onClick: handleAddresses,
+      icon: <CloudDownloadOutlined />,
+    },
+
+    {
+      label: "",
+      key: "Consultar",
+      onClick: handleRedirect,
+      icon: <ContactsOutlined />,
+    },
+    {
+      label: "",
+      key: "Perfil",
+      icon: <UserOutlined />,
+      children: [
+        {
+          label: "Cerrar sesión",
+          key: "1",
+          onClick: handleLogout,
+        },
+      ],
     },
   ];
 

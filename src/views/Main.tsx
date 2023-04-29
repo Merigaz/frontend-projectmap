@@ -48,10 +48,9 @@ function Main() {
                   style={{
                     backgroundColor: "#FFFFFF",
                     borderRadius: "20px",
-                    border: "1px solid black",
-                    overflow: "hidden",
+                    border: "1px solid #A49859",
                     backdropFilter: "blur(8px)",
-                    boxShadow: "inset 0px 0px 10px #343d4b",
+                    boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.8)",
                     height: 300,
                     width: "80%"
                   }}
@@ -63,18 +62,14 @@ function Main() {
                   style={{
                     backgroundColor: "#FFFFFF",
                     borderRadius: "20px",
-                    border: "1px solid black",
-                    overflow: "hidden",
+                    border: "1px solid #A49859",
                     backdropFilter: "blur(8px)",
-                    boxShadow: "inset 0px 0px 10px #343d4b",
+                    boxShadow: "inset 0px 0px 10px rgba(0, 0, 0, 0.8)",
                     height: 300,
                     width: "80%"
                   }}
                 >
                   <DemoLine />
-                </div>
-                <div>
-                  <NavProfile />
                 </div>
               </Content>
             </Sider>
@@ -94,7 +89,7 @@ function Main() {
         </Layout>
       </Layout>
       <Modal
-        title="Cantidad de registros por barrio"
+        title="Registros por barrio"
         open={visible2}
         onCancel={handleCancel2}
         footer={null}
@@ -104,7 +99,7 @@ function Main() {
         <DemoPie2 />
       </Modal>
       <Modal
-        title="Cantidad de registros por fecha"
+        title="Registros por fecha"
         open={visible}
         onCancel={handleCancel}
         footer={null}

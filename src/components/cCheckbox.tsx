@@ -5,6 +5,7 @@ import type { CheckboxValueType } from "antd/es/checkbox/Group";
 import { CheckboxGroupStyle } from "../styles/primaryTheme";
 import { useDispatch, useSelector } from "react-redux";
 import { setNameMarkers } from "../store/reducers/NameMarkersReducer";
+import { SearchOutlined } from "@ant-design/icons";
 
 function CheckboxMenu() {
   const dispatch = useDispatch();
@@ -97,7 +98,18 @@ function CheckboxMenu() {
         open={clicked}
         onOpenChange={handleClickChange}
       >
-        <Button>Hover me</Button>
+        <Button
+          icon={<SearchOutlined />}
+          style={{
+            backgroundColor: "#343D4B",
+            color: "#A49859",
+            left: "1%",
+            top: "10px",
+            border: "1px solid  #343D4B",
+          }}
+          size="large"
+          shape="circle"
+        />
       </Popover>
     </Popover>
   );
