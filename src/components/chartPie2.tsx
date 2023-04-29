@@ -4,7 +4,7 @@ import { Pie, measureTextWidth } from '@ant-design/plots';
 import { useSelector } from 'react-redux';
 
 const DemoPie2 = () => {
-  function renderStatistic(containerWidth, text, style) {
+  function renderStatistic(containerWidth: any, text: any, style: any) {
     const { width: textWidth, height: textHeight } = measureTextWidth(text, style);
     const R = containerWidth / 2; // r^2 = (w / 2)^2 + (h - offsetY)^2
 
