@@ -3,6 +3,7 @@ import NeighborhoodsCountReducer from './reducers/NeighborhoodsCountReducer';
 import DatesCountReducer from './reducers/DatesCountReducer';
 import MarkersMapReducer from './reducers/MarkersMapReducer';
 import NameMarkersReducer from './reducers/NameMarkersReducer';
+import AddressDataReducer from './reducers/AddressDataReducer';
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     DatesCount: DatesCountReducer,
     MarkersMap: MarkersMapReducer,
     NameMarkers: NameMarkersReducer,
+    AddressData: AddressDataReducer,
   },
 });
 

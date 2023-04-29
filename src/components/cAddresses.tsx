@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Checkbox from "antd/es/checkbox/Checkbox";
 import { ButtonDownloadStyle } from "../styles/primaryTheme";
+import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 const { Panel } = Collapse;
 
 interface Address {
@@ -20,6 +22,8 @@ interface AddressData {
 }
 
 const AddressesByNeighborhoods = () => {
+  const [cookies] = useCookies(["authToken"]);
+  const [cookies1] = useCookies(["isAdmin"]);
   const [expandIconPosition, setExpandIconPosition] = useState<"start" | "end">(
     "start"
   );
@@ -27,21 +31,18 @@ const AddressesByNeighborhoods = () => {
     setExpandIconPosition(newExpandIconPosition);
   };
 
-  const [data, setData] = useState<AddressData[]>([]);
-  useEffect(() => {
-    axios
-      .get<AddressData[]>(`${import.meta.env.VITE_BASE_URL}/addresses`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { AddressData } = useSelector((state: any) => state);
+  const [data, setData] = useState<AddressData[]>(AddressData.AddressData);
+  
+
   const [checkedNeighborhoods, setCheckedNeighborhoods] = useState<string[]>(
     []
   );
-
+useEffect(() => {
+    // Actualiza el estado del componente cuando cambia el estado de la tienda
+    setData(AddressData.AddressData);
+  }, [AddressData]);
+  
   const handleDownload = async (event: any) => {
     event.preventDefault();
 
@@ -128,13 +129,15 @@ const AddressesByNeighborhoods = () => {
         ))}
       </Collapse>
       <br />
-      <Button
-        type="primary"
-        style={ButtonDownloadStyle}
-        onClick={handleDownload}
-      >
-        Descargar información
-      </Button>
+      {cookies.authToken=="xyz" && cookies1.isAdmin=="true" ? (
+            <Button
+            type="primary"
+            style={ButtonDownloadStyle}
+            onClick={handleDownload}
+          >
+            Descargar información
+          </Button>
+          ) : null}
       <br />
     </>
   );

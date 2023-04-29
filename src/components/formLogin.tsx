@@ -11,11 +11,12 @@ function FormLogin() {
   const [cookiesisAdmin, setCookieisAdmin] = useCookies(["isAdmin"])
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleEmailChange = (event: any) => setEmail(event.target.value);
   const handlePasswordChange = (event: any) => setPassword(event.target.value);
   const navigate = useNavigate();
   const [modalError, contextHolderError] = Modal.useModal();
+  
+
   const errorModal = (message:any) => {
     let secondsToGo = 4;
 
@@ -51,7 +52,7 @@ function FormLogin() {
       if (data) {
        const authToken = "xyz";
       const { name, isAdmin } = data;
-    
+  
       setCookie("authToken", authToken, {
         path: "/",
         
@@ -62,7 +63,8 @@ function FormLogin() {
       });
       setCookieisAdmin("isAdmin", isAdmin, {
         path: "/",
-       
+        sameSite: "none",
+        secure: false,
       });
       }
       console.log(data);

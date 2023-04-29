@@ -14,13 +14,13 @@ import Sider from "antd/es/layout/Sider";
 import DemoPie from "../components/chartPie";
 import { Suspense, useState } from "react";
 import DemoLine from "../components/chartLine";
-import NavProfile from "../components/dropdownProfile";
 import DemoPie2 from "../components/chartPie2";
 import DemoLine2 from "../components/charLine2";
 
 function Main() {
 
   const [cookies] = useCookies(["authToken"]);
+  const [cookies1] = useCookies(["isAdmin"]);
   const [visible, setVisible] = useState(false);
   const handleModal = () => {
     setVisible(true);
@@ -36,11 +36,13 @@ function Main() {
   const handleCancel2 = () => {
     setVisible2(false);
   };
+  console.log(cookies1.isAdmin)
   return (
     <>
       <Layout style={LayoutStyle}>
         <Suspense>
-          {cookies["authToken"] ? (
+       
+          {cookies.authToken=="xyz" && cookies1.isAdmin=="true" ? (
             <Sider style={LeftsiderStyle} width={"26%"}>
               <Content style={LeftSiderContentStyle}>
                 <div

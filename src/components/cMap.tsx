@@ -1,6 +1,7 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import {
   getData,
+  getDataAddress,
   getDataDates,
   getDataNeighborhood,
   getDataPlaces,
@@ -30,19 +31,23 @@ import CheckboxMenu from "./cCheckbox";
 import { setMarkersMap } from "../store/reducers/MarkersMapReducer";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { setAddressData } from "../store/reducers/AddressDataReducer";
 
 function ComponentMap() {
+  const [cookies] = useCookies(["authToken"]);
+  const [cookies1] = useCookies(["isAdmin"]);
   const [key, setKey] = useState("Map");
-  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(13);
   const dispatch = useDispatch();
-  const [cookies] = useCookies(["name"]);
   const [, , removeCookie] = useCookies(["authToken"]);
+  const [, , removeCookie1] = useCookies(["isAdmin"]);
   const navigate = useNavigate();
   const handleLogout = () => {
     removeCookie("authToken", { path: "/" });
+    removeCookie1("isAdmin", { path: "/" })
     navigate("/");
   };
   const [visible2, setVisible2] = useState(false);
@@ -55,11 +60,14 @@ function ComponentMap() {
     const response2 = await getDataNeighborhood();
     const response3 = await getDataDates();
     const response4 = await getDataPlaces();
-    setData(response);
+    const response5 = await getDataAddress();
+    setData1(response);
     dispatch(setNeighborhoodsCount(response2));
     dispatch(setDatesCount(response3));
     dispatch(setMarkersMap(response));
+    dispatch(setAddressData(response5));
     setData2(response4);
+
   }
 
   const handleForm = () => {
@@ -180,9 +188,9 @@ function ComponentMap() {
           items={items}
           style={SidebarStyle}
         />
-        {data &&
+        {data1 &&
           (markersToShow.length === 0
-            ? data.map((marker: any) => (
+            ? data1.map((marker: any) => (
                 <Marker
                   key={(i = i + 2)}
                   position={{ lat: marker.lat, lng: marker.lng }}
@@ -198,7 +206,7 @@ function ComponentMap() {
                   }}
                 />
               ))
-            : data.map((marker: any) =>
+            : data1.map((marker: any) =>
                 markersToShow.includes(marker.neighborhood) ? (
                   <Marker
                     key={(i = i + 2)}
@@ -239,17 +247,31 @@ function ComponentMap() {
       >
         <TabsForm />
       </Modal>
-      <Modal
-        title="Descarga de datos"
-        open={visible2}
-        onCancel={handleCancel2}
-        footer={null}
-        maskClosable={false}
-        width={730}
-      >
-        <br />
-        <AddressesByNeighborhoods />
-      </Modal>
+     
+       {cookies.authToken=="xyz" && cookies1.isAdmin=="true" ? (
+       <Modal
+       title="Descarga de datos"
+       open={visible2}
+       onCancel={handleCancel2}
+       footer={null}
+       maskClosable={false}
+       width={730}
+     >
+       <br />
+       <AddressesByNeighborhoods  />
+     </Modal>
+      ) :   <Modal
+      title="Datos direcciones"
+      open={visible2}
+      onCancel={handleCancel2}
+      footer={null}
+      maskClosable={false}
+      width={730}
+    >
+      <br />
+      <AddressesByNeighborhoods  />
+    </Modal>}
+      
     </>
   );
 }
