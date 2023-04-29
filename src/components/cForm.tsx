@@ -75,7 +75,7 @@ function ComponentForm() {
       ...values,
       address: address,
       markerAddress: markerAddress,
-      date: values.date.format("D-M-YY"),
+      date: values.date.format("YYYYMMD"),
     };
   
     setLoading(true);
@@ -142,6 +142,7 @@ function ComponentForm() {
       <Select.Option value="Carrera">Carrera</Select.Option>
       <Select.Option value="Avenida">Avenida</Select.Option>
       <Select.Option value="Diagonal">Diagonal</Select.Option>
+      <Select.Option value="Via">Via</Select.Option>
       <Select.Option value="Transversal">Transversal</Select.Option>
     </Select>
     <Input style={{ width: 50, marginRight: 4, borderRadius: "6px" }} placeholder="26" required
@@ -176,6 +177,7 @@ function ComponentForm() {
       <Select.Option value="Carrera">Carrera</Select.Option>
       <Select.Option value="Avenida">Avenida</Select.Option>
       <Select.Option value="Diagonal">Diagonal</Select.Option>
+      <Select.Option value="Via">Via</Select.Option>
       <Select.Option value="Transversal">Transversal</Select.Option>
     </Select>
     <Input style={{ width: 50, marginRight: 4 }} placeholder="68" required

@@ -56,7 +56,7 @@ export const SidebarStyle = {
   borderRadius: "20px",
   backgroundColor: "#343D4B",
   border:"1px solid #343D4B",
-  width: "40%",
+  width: "44%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
