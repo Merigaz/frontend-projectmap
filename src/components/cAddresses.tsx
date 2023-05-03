@@ -14,6 +14,8 @@ interface Address {
   Dirección: string;
   InfoAdicional: string;
   Fecha: string;
+  NombreVotación: string;
+  DirecciónVotación: string;
 }
 
 interface AddressData {
@@ -57,13 +59,16 @@ useEffect(() => {
         }
       );
       //Arregla el array
+      console.log(data)
       const newData = data.map(
-        ({ _id, name, id, address, optional, neighborhood, date }:{ _id: any, name: string, id: number, address: string,optional: string, neighborhood: string, date: Date }) => ({
+        ({ _id, name, id, address, optional, neighborhood, date, pollingPlace, pollingAddress }:{ _id: any, name: string, id: number, address: string,optional: string, neighborhood: string, date: Date, pollingPlace: string, pollingAddress: string }) => ({
           NOMBRE: name,
           CÉDULA: id,
           DIRECCIÓN: address,
           INFOADICIONAL: optional,
           BARRIO: neighborhood,
+          LUGARDEVOTACIÓN: pollingPlace,
+          DIRECCIÓNLUGARDEVOTACIÓN: pollingAddress,
           FECHA: date,
         })
       );
@@ -126,6 +131,8 @@ useEffect(() => {
                 <p>CC: {address.CC}</p>
                 <p>Dirección: {address.Dirección}</p>
                 <p>{address.InfoAdicional}</p>
+                <p>Lugar de votación: {address.NombreVotación}</p>
+                <p>Dirección de votación: {address.DirecciónVotación}</p>
                 <p>Fecha: {address.Fecha}</p>
                 {index < addressData.datos.length - 1 && <hr />}
               </div>

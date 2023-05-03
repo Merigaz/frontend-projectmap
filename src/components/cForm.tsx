@@ -21,6 +21,18 @@ function ComponentForm() {
     input5: ''
   });
 
+  const [formValuesPolling, setFormValuesPolling] = useState({
+    select1: '',
+    input1: '',
+    select2: '',
+    select3: '',
+    input2: '',
+    input3: '',
+    select4: '',
+    input4: '',
+    input5: ''
+  });
+
   const [modal, contextHolder] = Modal.useModal();
   const countDown = () => {
     let secondsToGo = 2;
@@ -70,12 +82,14 @@ function ComponentForm() {
     const markerAddress = `${formValues.select1}${formValues.input1}${formValues.select2}#${formValues.select3}${formValues.input3}${formValues.select4}-${formValues.input5}`
 
     const address = `${formValues.select1}${formValues.input1}${formValues.select2}${formValues.input2}#${formValues.select3}${formValues.input3}${formValues.select4}${formValues.input4}-${formValues.input5}`
-  
+    const pollingAddress = `${formValuesPolling.select1}${formValuesPolling.input1}${formValuesPolling.select2}${formValuesPolling.input2}#${formValuesPolling.select3}${formValuesPolling.input3}${formValuesPolling.select4}${formValuesPolling.input4}-${formValuesPolling.input5}`
+
     const payload = {
       ...values,
       address: address,
       markerAddress: markerAddress,
       date: values.date.format("YYYYMMD"),
+      pollingAddress: pollingAddress
     };
   
     setLoading(true);
@@ -238,6 +252,100 @@ function ComponentForm() {
             ]}
           >
             <DatePicker locale={locale} format="YYYY-MM-DD" />
+          </Form.Item>
+          <Form.Item label="Lugar de votación" name="pollingPlace"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese el nombre del lugar de votación",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item label="Dirección" name="address"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese la dirección",
+              },
+            ]}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+    <Select style={{ width: 110, marginRight: 4, borderRadius: "6px" }} placeholder="Carrera"
+      onChange={(value) => setFormValuesPolling({...formValuesPolling, select1: value})}
+    >
+      <Select.Option value="Calle" >Calle</Select.Option>
+      <Select.Option value="Carrera">Carrera</Select.Option>
+      <Select.Option value="Avenida">Avenida</Select.Option>
+      <Select.Option value="Diagonal">Diagonal</Select.Option>
+      <Select.Option value="Via">Via</Select.Option>
+      <Select.Option value="Transversal">Transversal</Select.Option>
+    </Select>
+    <Input style={{ width: 50, marginRight: 4, borderRadius: "6px" }} placeholder="26" required
+      onChange={(event) => setFormValuesPolling({...formValuesPolling, input1: event.target.value})}
+    />
+    <Select style={{ width: 70, marginRight: 4 }} placeholder="A"
+      onChange={(value) => setFormValuesPolling({...formValuesPolling, select2: value})}
+    >
+      <Select.Option value=""> </Select.Option>
+      <Select.Option value="A">A</Select.Option>
+      <Select.Option value="B">B</Select.Option>
+      <Select.Option value="C">C</Select.Option>
+      <Select.Option value="D">D</Select.Option>
+      <Select.Option value="E">E</Select.Option>
+      <Select.Option value="F">F</Select.Option>
+      <Select.Option value="G">G</Select.Option>
+      <Select.Option value="H">H</Select.Option>
+      <Select.Option value="I">I</Select.Option>
+      <Select.Option value="J">J</Select.Option>
+      <Select.Option value="K">K</Select.Option>
+      <Select.Option value="L">L</Select.Option>
+      <Select.Option value="sur">SUR</Select.Option>
+    </Select>
+    <Input style={{ width: 40, marginRight: 4, borderRadius: "6px" }} placeholder="2"
+      onChange={(event) => setFormValuesPolling({...formValuesPolling, input2: event.target.value})}
+    />
+    <Input style={{ width: 30, marginRight: 4, border: "none", background: "transparent", color: "#000000" }} disabled value="#" />
+    <Select style={{ width: 110, marginRight: 4, borderRadius: "6px" }} placeholder="Carrera"
+      onChange={(value) => setFormValuesPolling({...formValuesPolling, select3: value})}
+    >
+      <Select.Option value="Calle" >Calle</Select.Option>
+      <Select.Option value="Carrera">Carrera</Select.Option>
+      <Select.Option value="Avenida">Avenida</Select.Option>
+      <Select.Option value="Diagonal">Diagonal</Select.Option>
+      <Select.Option value="Via">Via</Select.Option>
+      <Select.Option value="Transversal">Transversal</Select.Option>
+    </Select>
+    <Input style={{ width: 50, marginRight: 4 }} placeholder="68" required
+      onChange={(event) => setFormValuesPolling({...formValuesPolling, input3: event.target.value})}
+    />
+    <Select style={{ width: 70, marginRight: 4 }} placeholder="B"
+      onChange={(value) => setFormValuesPolling({...formValuesPolling, select4: value})}
+    >
+      <Select.Option value=""> </Select.Option>
+      <Select.Option value="A">A</Select.Option>
+      <Select.Option value="B">B</Select.Option>
+      <Select.Option value="C">C</Select.Option>
+      <Select.Option value="D">D</Select.Option>
+      <Select.Option value="E">E</Select.Option>
+      <Select.Option value="F">F</Select.Option>
+      <Select.Option value="G">G</Select.Option>
+      <Select.Option value="H">H</Select.Option>
+      <Select.Option value="I">I</Select.Option>
+      <Select.Option value="J">J</Select.Option>
+      <Select.Option value="K">K</Select.Option>
+      <Select.Option value="L">L</Select.Option>
+      <Select.Option value="sur">SUR</Select.Option>
+    </Select>
+    <Input style={{ width: 40, marginRight: 4, borderRadius: "6px" }} placeholder="11" 
+      onChange={(event) => setFormValuesPolling({...formValuesPolling, input4: event.target.value})}
+    />
+    <Input style={{ width: 30, marginRight: 4, border: "none", background: "transparent", color: "#000000" }} disabled value="-" />
+    <Input style={{ width: 50, marginRight: 4, }} placeholder="55" required
+      onChange={(event) => setFormValuesPolling({...formValuesPolling, input5: event.target.value})} 
+    />
+  </div>
           </Form.Item>
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
