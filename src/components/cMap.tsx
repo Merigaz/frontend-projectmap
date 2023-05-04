@@ -67,12 +67,9 @@ function ComponentMap() {
     const response4 = await getDataPlacesCount();
     const response5 = await getDataAddress();
     const response6 = await getDataPlaces();
-<<<<<<< HEAD
     const response7 = await getDataPlacesName();
-=======
-    const response7 = await getDataPlacesName()
+  
     const response8 = await getPlaces();
->>>>>>> f5f6e642d5db3b8585c7d80a3556c27db3cbd85d
     setData1(response);
     setData2(response6);
     dispatch(setNeighborhoodsCount(response2));
