@@ -57,7 +57,7 @@ function CheckboxMenu() {
         onChange={onCheckAllChange}
         checked={checkAll}
       >
-        Check all
+        Marcar todos
       </Checkbox>
       <br />
 

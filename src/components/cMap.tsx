@@ -32,6 +32,7 @@ import { setMarkersMap } from "../store/reducers/MarkersMapReducer";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { setAddressData } from "../store/reducers/AddressDataReducer";
+import { setPlacesVote } from "../store/reducers/PlacesVoteReducer";
 
 function ComponentMap() {
   const [cookies] = useCookies(["authToken"]);
@@ -62,11 +63,12 @@ function ComponentMap() {
     const response4 = await getDataPlaces();
     const response5 = await getDataAddress();
     setData1(response);
+    setData2(response4);
     dispatch(setNeighborhoodsCount(response2));
     dispatch(setDatesCount(response3));
     dispatch(setMarkersMap(response));
     dispatch(setAddressData(response5));
-    setData2(response4);
+    dispatch(setPlacesVote(response4));
 
   }
 
