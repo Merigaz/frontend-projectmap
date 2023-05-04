@@ -11,6 +11,7 @@ const { Panel } = Collapse;
 interface Address {
   Nombre: string;
   CC: string;
+  Teléfono: string;
   Dirección: string;
   InfoAdicional: string;
   Fecha: string;
@@ -61,9 +62,10 @@ useEffect(() => {
       //Arregla el array
       console.log(data)
       const newData = data.map(
-        ({ _id, name, id, address, optional, neighborhood, date, pollingPlace, pollingAddress }:{ _id: any, name: string, id: number, address: string,optional: string, neighborhood: string, date: Date, pollingPlace: string, pollingAddress: string }) => ({
+        ({ _id, name, id, phone, address, optional, neighborhood, date, pollingPlace, pollingAddress }:{ _id: any, name: string, id: number, phone: string, address: string,optional: string, neighborhood: string, date: Date, pollingPlace: string, pollingAddress: string }) => ({
           NOMBRE: name,
           CÉDULA: id,
+          TELÉFONO: phone,
           DIRECCIÓN: address,
           INFOADICIONAL: optional,
           BARRIO: neighborhood,
@@ -129,6 +131,7 @@ useEffect(() => {
               <div key={index.toString()}>
                 <p>Nombre: {address.Nombre}</p>
                 <p>CC: {address.CC}</p>
+                <p>Teléfono: {address.Teléfono}</p>
                 <p>Dirección: {address.Dirección}</p>
                 <p>{address.InfoAdicional}</p>
                 <p>Lugar de votación: {address.LugardeVotación}</p>
