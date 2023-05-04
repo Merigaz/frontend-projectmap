@@ -1,10 +1,11 @@
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import {
-  getData,
   getDataAddress,
   getDataDates,
   getDataNeighborhood,
   getDataPlaces,
+  getDataPlacesCount,
+  getDataPlacesName,
   getDatalatlng,
 } from "../hooks/useAxios";
 import { Menu } from "antd";
@@ -14,7 +15,6 @@ import type { MenuProps } from "antd";
 import {
   CloudDownloadOutlined,
   ContactsOutlined,
-  DownloadOutlined,
   FormOutlined,
   UserOutlined,
   ZoomInOutlined,
@@ -27,12 +27,13 @@ import { setNeighborhoodsCount } from "../store/reducers/NeighborhoodsCountReduc
 import { setDatesCount } from "../store/reducers/DatesCountReducer";
 import AddressesByNeighborhoods from "./cAddresses";
 import TabsForm from "./cTab";
-import CheckboxMenu from "./cCheckbox";
 import { setMarkersMap } from "../store/reducers/MarkersMapReducer";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { setAddressData } from "../store/reducers/AddressDataReducer";
 import { setPlacesVote } from "../store/reducers/PlacesVoteReducer";
+import CheckboxMenu from "./cCheckboxMenu";
+import { setPlacesName } from "../store/reducers/PlacesNameReducer";
 
 function ComponentMap() {
   const [cookies] = useCookies(["authToken"]);
@@ -48,7 +49,7 @@ function ComponentMap() {
   const navigate = useNavigate();
   const handleLogout = () => {
     removeCookie("authToken", { path: "/" });
-    removeCookie1("isAdmin", { path: "/" })
+    removeCookie1("isAdmin", { path: "/" });
     navigate("/");
   };
   const [visible2, setVisible2] = useState(false);
@@ -57,19 +58,22 @@ function ComponentMap() {
   }, []);
 
   async function fetchData() {
+    
     const response = await getDatalatlng();
     const response2 = await getDataNeighborhood();
     const response3 = await getDataDates();
-    const response4 = await getDataPlaces();
+    const response4 = await getDataPlacesCount();
     const response5 = await getDataAddress();
+    const response6 = await getDataPlaces();
+    const response7 = await getDataPlacesName()
     setData1(response);
-    setData2(response4);
+    setData2(response6);
     dispatch(setNeighborhoodsCount(response2));
     dispatch(setDatesCount(response3));
     dispatch(setMarkersMap(response));
     dispatch(setAddressData(response5));
     dispatch(setPlacesVote(response4));
-
+    dispatch(setPlacesName(response7));
   }
 
   const handleForm = () => {
@@ -101,11 +105,12 @@ function ComponentMap() {
     anchor: new window.google.maps.Point(15, 15),
     labelOrigin: new google.maps.Point(28, 68),
   };
-  const iconplaces = {
+  const iconvote = {
     url: `http://hluapp.com/icon/vote.png`,
-    scaledSize: new window.google.maps.Size(46, 46),
+    scaledSize: new window.google.maps.Size(56, 86),
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
+    labelOrigin: new google.maps.Point(28, 68),
   };
   const items: MenuProps["items"] = [
     {
@@ -167,6 +172,10 @@ function ComponentMap() {
   let j = 0;
   const { NameMarkers } = useSelector((state: any) => state.NameMarkers);
   const markersToShow = NameMarkers;
+  const { PlacesMarkers } = useSelector((state: any) => state.PlacesMarkers);
+  const PlacesmarkersToShow = PlacesMarkers;
+
+  const placesVote = useSelector((state: any) => state.PlacesVote.PlacesVote);
 
   return (
     <>
@@ -211,7 +220,7 @@ function ComponentMap() {
             : data1.map((marker: any) =>
                 markersToShow.includes(marker.neighborhood) ? (
                   <Marker
-                    key={(i = i + 2)}
+                    key={(j = j + 2)}
                     position={{ lat: marker.lat, lng: marker.lng }}
                     title={marker.address}
                     icon={iconid}
@@ -226,15 +235,50 @@ function ComponentMap() {
                   />
                 ) : null
               ))}
+
         {data2 &&
-          data2.map((marker: any) => (
-            <Marker
-              key={(j = j + 2)}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              title={marker.name}
-              icon={iconplaces}
-            />
-          ))}
+          (PlacesmarkersToShow.length === 0
+            ? data2.map((marker: any) => (
+                <Marker
+                  key={(j = j + 2)}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  title={marker.name}
+                  icon={iconvote}
+                  options={{
+                    label: {
+                      text:
+                        placesVote.find(
+                          (place: any) => place.name === marker.name
+                        )?.count.toString() ,
+                      color: "#B4AB6F",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                    },
+                  }}
+                />
+              ))
+            : data2.map((marker: any) =>
+                PlacesmarkersToShow.includes(marker.name) ? (
+                  <Marker
+                    key={(i = i + 2)}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    title={marker.name}
+                    icon={iconvote}
+                    options={{
+                      label: {
+                        text:
+                          placesVote.find(
+                            (place: any) => place.name === marker.name
+                          )?.count.toString(),
+                        color: "#B4AB6F",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                      },
+                    }}
+                  />
+                ) : null
+              ))}
+
         <CheckboxMenu />
       </GoogleMap>
 
@@ -249,31 +293,32 @@ function ComponentMap() {
       >
         <TabsForm />
       </Modal>
-     
-       {cookies.authToken=="xyz" && cookies1.isAdmin=="true" ? (
-       <Modal
-       title="Descarga de datos"
-       open={visible2}
-       onCancel={handleCancel2}
-       footer={null}
-       maskClosable={false}
-       width={730}
-     >
-       <br />
-       <AddressesByNeighborhoods  />
-     </Modal>
-      ) :   <Modal
-      title="Datos direcciones"
-      open={visible2}
-      onCancel={handleCancel2}
-      footer={null}
-      maskClosable={false}
-      width={730}
-    >
-      <br />
-      <AddressesByNeighborhoods  />
-    </Modal>}
-      
+
+      {cookies.authToken == "xyz" && cookies1.isAdmin == "true" ? (
+        <Modal
+          title="Descarga de datos"
+          open={visible2}
+          onCancel={handleCancel2}
+          footer={null}
+          maskClosable={false}
+          width={730}
+        >
+          <br />
+          <AddressesByNeighborhoods />
+        </Modal>
+      ) : (
+        <Modal
+          title="Datos direcciones"
+          open={visible2}
+          onCancel={handleCancel2}
+          footer={null}
+          maskClosable={false}
+          width={730}
+        >
+          <br />
+          <AddressesByNeighborhoods />
+        </Modal>
+      )}
     </>
   );
 }

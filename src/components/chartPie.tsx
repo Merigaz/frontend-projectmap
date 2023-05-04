@@ -9,8 +9,6 @@ const DemoPie = () => {
     name: neighborhoodsCount.name,
     count: neighborhoodsCount.count
   }));
-  
-
   const config = {
     appendPadding: 20,
     data,
@@ -37,6 +35,7 @@ const DemoPie = () => {
     pieStyle: {
       lineWidth: 0,
     },
+    
   };
   return <Pie {...config} />;
 }

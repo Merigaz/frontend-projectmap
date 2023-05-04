@@ -22,8 +22,8 @@ function ComponentForm() {
     input5: "",
   });
 
-  const placesVote = useSelector((state: any) => state.PlacesVote);
-  console.log(placesVote, "Caca2");
+  const placesName = useSelector((state: any) => state.PlacesName);
+  ;
   const [modal, contextHolder] = Modal.useModal();
   const countDown = () => {
     let secondsToGo = 2;
@@ -316,7 +316,7 @@ function ComponentForm() {
           >
             <Select style={{ width: 230, marginRight: 4 }}>
               {/* se utiliza la función map para iterar a través de los elementos del array PlacesVote */}
-              {placesVote.PlacesVote.map((place: any) => (
+              {placesName.PlacesName.map((place: any) => (
                 // se renderiza una opción para cada elemento, utilizando la propiedad "name"
                 <Select.Option
                   key={place._id}
