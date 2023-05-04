@@ -58,14 +58,13 @@ function ComponentMap() {
   }, []);
 
   async function fetchData() {
-    
     const response = await getDatalatlng();
     const response2 = await getDataNeighborhood();
     const response3 = await getDataDates();
     const response4 = await getDataPlacesCount();
     const response5 = await getDataAddress();
     const response6 = await getDataPlaces();
-    const response7 = await getDataPlacesName()
+    const response7 = await getDataPlacesName();
     setData1(response);
     setData2(response6);
     dispatch(setNeighborhoodsCount(response2));
@@ -111,6 +110,18 @@ function ComponentMap() {
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
     labelOrigin: new google.maps.Point(28, 68),
+  };
+  const iconid1 = {
+    url: `http://hluapp.com/icon/user1.png`,
+    scaledSize: new window.google.maps.Size(56, 56),
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15),
+  };
+  const iconvote1 = {
+    url: `http://hluapp.com/icon/vote1.png`,
+    scaledSize: new window.google.maps.Size(56, 56),
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15),
   };
   const items: MenuProps["items"] = [
     {
@@ -206,13 +217,12 @@ function ComponentMap() {
                   key={(i = i + 2)}
                   position={{ lat: marker.lat, lng: marker.lng }}
                   title={marker.address}
-                  icon={iconid}
+                  icon={iconid1}
                   options={{
                     label: {
-                      text: marker.count.toString(),
-                      color: "#B4AB6F",
-                      fontSize: "20px",
-                      fontWeight: "bold",
+                      text:"",
+                      color: "transparent",
+                      fontSize: "2px",
                     },
                   }}
                 />
@@ -226,7 +236,7 @@ function ComponentMap() {
                     icon={iconid}
                     options={{
                       label: {
-                        text: marker.count.toString(),
+                        text: markersToShow.length > 0 ? marker.count.toString() : "",
                         color: "#B4AB6F",
                         fontSize: "20px",
                         fontWeight: "bold",
@@ -243,18 +253,7 @@ function ComponentMap() {
                   key={(j = j + 2)}
                   position={{ lat: marker.lat, lng: marker.lng }}
                   title={marker.name}
-                  icon={iconvote}
-                  options={{
-                    label: {
-                      text:
-                        placesVote.find(
-                          (place: any) => place.name === marker.name
-                        )?.count.toString() ,
-                      color: "#B4AB6F",
-                      fontSize: "20px",
-                      fontWeight: "bold",
-                    },
-                  }}
+                  icon={iconvote1}
                 />
               ))
             : data2.map((marker: any) =>
@@ -266,10 +265,9 @@ function ComponentMap() {
                     icon={iconvote}
                     options={{
                       label: {
-                        text:
-                          placesVote.find(
-                            (place: any) => place.name === marker.name
-                          )?.count.toString(),
+                        text: placesVote
+                          .find((place: any) => place.name === marker.name)
+                          ?.count.toString(),
                         color: "#B4AB6F",
                         fontSize: "20px",
                         fontWeight: "bold",

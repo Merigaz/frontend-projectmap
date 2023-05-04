@@ -21,8 +21,6 @@ const DemoPie = () => {
     label: {
       type: 'inner',
       offset: '-8%',
-      content: (data: any) =>
-      `${(data.percent * 100).toFixed(0)}%`,
       style: {
         fontSize: 14,
       },
