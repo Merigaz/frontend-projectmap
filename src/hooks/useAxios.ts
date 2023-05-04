@@ -40,6 +40,12 @@ export async function getDataAddress() {
   );
   return response.data;
 }
+export async function getPlaces() {
+  const response = await axios.get(
+    `${import.meta.env.VITE_BASE_URL}/places`
+  );
+  return response.data;
+}
 export async function getDataPlacesCount() {
   const response = await axios.get(
     `${import.meta.env.VITE_BASE_URL}/listplaces`

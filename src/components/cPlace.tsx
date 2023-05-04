@@ -29,9 +29,6 @@ function ComponentFormPlace() {
 
     const timer = setInterval(() => {
       secondsToGo -= 1;
-/*       instance.update({
-        content: `This modal will be destroyed after ${secondsToGo} second.`,
-      }); */
     }, 1000);
 
     setTimeout(() => {
@@ -51,9 +48,6 @@ function ComponentFormPlace() {
 
     const timer = setInterval(() => {
       secondsToGo -= 1;
-/*       instance.update({
-        content: `This modal will be destroyed after ${secondsToGo} second.`,
-      }); */
     }, 1000);
 
     setTimeout(() => {

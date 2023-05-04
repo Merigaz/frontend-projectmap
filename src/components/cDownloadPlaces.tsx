@@ -19,11 +19,11 @@ interface Address {
 }
 
 interface AddressData {
-  neighborhood: string;
+  pollingPlace: string;
   datos: Address[];
 }
 
-const AddressesByNeighborhoods = () => {
+const AddressesByPlaces = () => {
   const [cookies] = useCookies(["authToken"]);
   const [cookies1] = useCookies(["isAdmin"]);
   const [expandIconPosition, setExpandIconPosition] = useState<"start" | "end">(
@@ -33,25 +33,25 @@ const AddressesByNeighborhoods = () => {
     setExpandIconPosition(newExpandIconPosition);
   };
 
-  const { AddressData } = useSelector((state: any) => state);
-  const [data, setData] = useState<AddressData[]>(AddressData.AddressData);
+  const { Places } = useSelector((state: any) => state);
+  const [data, setData] = useState<AddressData[]>(Places.Places);
   
 
-  const [checkedNeighborhoods, setCheckedNeighborhoods] = useState<string[]>(
+  const [checkedPlaces, setCheckedPlaces] = useState<string[]>(
     []
   );
 useEffect(() => {
     // Actualiza el estado del componente cuando cambia el estado de la tienda
-    setData(AddressData.AddressData);
-  }, [AddressData]);
+    setData(Places.Places);
+  }, [Places]);
   
   const handleDownload = async (event: any) => {
     event.preventDefault();
 
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/markersByNeighborhoods`,
-        { neighborhoods: checkedNeighborhoods },
+        `${import.meta.env.VITE_BASE_URL}/markersByPlaces`,
+        { pollingPlaces: checkedPlaces },
         {
           headers: {
             "Content-Type": "application/json",
@@ -94,38 +94,38 @@ useEffect(() => {
         onChange={(key) => console.log(key)}
         expandIconPosition={expandIconPosition}
       >
-        {data.map((addressData, index) => (
+        {data.map((placesData, index) => (
           <Panel
             header={
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Checkbox
-                  checked={checkedNeighborhoods.includes(
-                    addressData.neighborhood
+                  checked={checkedPlaces.includes(
+                    placesData.pollingPlace
                   )}
                   onClick={(event: React.MouseEvent<HTMLInputElement>) => {
                     event.stopPropagation();
                     const isChecked = event.currentTarget.checked;
                     if (isChecked) {
-                      setCheckedNeighborhoods((prevChecked) => [
+                      setCheckedPlaces((prevChecked) => [
                         ...prevChecked,
-                        addressData.neighborhood,
+                        placesData.pollingPlace,
                       ]);
                     } else {
-                      setCheckedNeighborhoods((prevChecked) =>
+                      setCheckedPlaces((prevChecked) =>
                         prevChecked.filter(
-                          (neighborhood) =>
-                            neighborhood !== addressData.neighborhood
+                          (pollingPlace) =>
+                          pollingPlace !== placesData.pollingPlace
                         )
                       );
                     }
                   }}
                 />
-                <div style={{ marginLeft: 8 }}>{addressData.neighborhood}</div>
+                <div style={{ marginLeft: 8 }}>{placesData.pollingPlace}</div>
               </div>
             }
             key={index.toString()}
           >
-            {addressData.datos.map((address, index) => (
+            {placesData.datos.map((address, index) => (
               <div key={index.toString()}>
                 <p>Nombre: {address.Nombre}</p>
                 <p>CC: {address.CC}</p>
@@ -134,7 +134,7 @@ useEffect(() => {
                 <p>Lugar de votación: {address.LugardeVotación}</p>
                 <p>Dirección de votación: {address.DireccióndeVotación}</p>
                 <p>Fecha: {address.Fecha}</p>
-                {index < addressData.datos.length - 1 && <hr />}
+                {index < placesData.datos.length - 1 && <hr />}
               </div>
             ))}
           </Panel>
@@ -155,4 +155,4 @@ useEffect(() => {
   );
 };
 
-export default AddressesByNeighborhoods;
+export default AddressesByPlaces;

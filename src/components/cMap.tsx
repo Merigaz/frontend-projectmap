@@ -7,6 +7,7 @@ import {
   getDataPlacesCount,
   getDataPlacesName,
   getDatalatlng,
+  getPlaces,
 } from "../hooks/useAxios";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
@@ -34,6 +35,8 @@ import { setAddressData } from "../store/reducers/AddressDataReducer";
 import { setPlacesVote } from "../store/reducers/PlacesVoteReducer";
 import CheckboxMenu from "./cCheckboxMenu";
 import { setPlacesName } from "../store/reducers/PlacesNameReducer";
+import DownloadsTabsForm from "./cTabDownloads";
+import { setPlaces } from "../store/reducers/PlacesReducer";
 
 function ComponentMap() {
   const [cookies] = useCookies(["authToken"]);
@@ -66,6 +69,7 @@ function ComponentMap() {
     const response5 = await getDataAddress();
     const response6 = await getDataPlaces();
     const response7 = await getDataPlacesName()
+    const response8 = await getPlaces();
     setData1(response);
     setData2(response6);
     dispatch(setNeighborhoodsCount(response2));
@@ -74,6 +78,7 @@ function ComponentMap() {
     dispatch(setAddressData(response5));
     dispatch(setPlacesVote(response4));
     dispatch(setPlacesName(response7));
+    dispatch(setPlaces(response8));
   }
 
   const handleForm = () => {
@@ -304,7 +309,7 @@ function ComponentMap() {
           width={730}
         >
           <br />
-          <AddressesByNeighborhoods />
+          <DownloadsTabsForm />
         </Modal>
       ) : (
         <Modal
