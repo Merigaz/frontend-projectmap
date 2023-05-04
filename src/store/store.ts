@@ -7,6 +7,7 @@ import AddressDataReducer from './reducers/AddressDataReducer';
 import PlacesVoteReducer from './reducers/PlacesVoteReducer';
 import PlacesMarkersReducer from './reducers/PlacesMarkersReducer';
 import PlacesNameReducer from './reducers/PlacesNameReducer';
+import PlacesReducer from './reducers/PlacesReducer';
 
 
 const store = configureStore({
@@ -19,6 +20,7 @@ const store = configureStore({
     PlacesVote: PlacesVoteReducer,
     PlacesMarkers: PlacesMarkersReducer,
     PlacesName: PlacesNameReducer,
+    Places: PlacesReducer,
   },
 });
 

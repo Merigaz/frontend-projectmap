@@ -125,6 +125,18 @@ function ComponentForm() {
             <Input />
           </Form.Item>
           <Form.Item
+            label="Teléfono"
+            name="phone"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingresa el número de teléfono",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             label="Dirección"
             name="address"
             rules={[
