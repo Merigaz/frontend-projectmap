@@ -11,7 +11,7 @@ const DemoLine2 = () => {
   }));
   const config = {
     data,
-    padding: 'auto' as const, 
+    appendPadding: 20, 
     xField: 'name',
     yField: 'Ingresos',
     xAxis: {

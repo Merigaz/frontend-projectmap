@@ -150,7 +150,6 @@ function Main() {
         <br />
         <div
           style={{
-           
             borderRadius: "20px",
             border: "2px solid #A49859",
             height: "auto",
@@ -171,7 +170,6 @@ function Main() {
         <br />
         <div
           style={{
-            
             borderRadius: "20px",
             border: "2px solid #A49859",
             height: "auto",
@@ -180,7 +178,6 @@ function Main() {
         >
           <DemoPiePlaces2 />
         </div>
-        
       </Modal>
       <Modal
         title="Registros por fecha"
@@ -190,7 +187,17 @@ function Main() {
         maskClosable={false}
         width={850}
       >
-        <DemoLine2 />
+        <br />
+        <div
+          style={{
+            borderRadius: "20px",
+            border: "2px solid #A49859",
+            height: "auto",
+            width: "auto",
+          }}
+        >
+          <DemoLine2 />
+        </div>
       </Modal>
     </>
   );
