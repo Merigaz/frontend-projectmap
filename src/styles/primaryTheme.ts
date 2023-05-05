@@ -9,12 +9,20 @@ export const primaryTheme = {
 export const componentsPrimaryTheme = {
   Menu: {
     colorPrimary: "#FFFEF7",
-    colorItemText: "#A49859",
+    colorItemText: "#C3B984",
     colorItemTextHover: "#E6DEB7",
   },
   Typography: {
     colorText: "#665982",
     colorTextHeading: "#665982",
+  },
+  Button: {
+    colorTextLightSolid: "#E6DEB7",
+    colorText: "#E6DEB7",
+  },
+  Select: {
+    controlItemBgHover: "#E6DEB7",
+    controlItemBgActive: "#C3B984"
   },
 };
 export const LeftsiderStyle = {
@@ -55,7 +63,7 @@ export const SidebarStyle = {
   transform: "translateX(-50%)",
   borderRadius: "20px",
   backgroundColor: "#343D4B",
-  border:"1px solid #343D4B",
+  border: "1px solid #343D4B",
   width: "44%",
   display: "flex",
   justifyContent: "center",
@@ -87,7 +95,7 @@ export const LeftSiderContentStyle = {
   borderRadius: "20px",
   backdropFilter: "blur(5px)",
   border: "1px solid #A49859",
-  boxShadow: " 0 0 10px rgba(0, 0, 0, 0.8)"
+  boxShadow: " 0 0 10px rgba(0, 0, 0, 0.8)",
 } as React.CSSProperties;
 export const ButtonLoginStyle = {
   width: "100%",
@@ -108,7 +116,7 @@ export const CheckboxGroupStyle = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  border:"1px solid #A48C59",
+  border: "1px solid #A48C59",
   borderRadius: "20px",
   gap: "8px",
   padding: "20px",

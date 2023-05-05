@@ -9,7 +9,7 @@ import {
   getDatalatlng,
   getPlaces,
 } from "../hooks/useAxios";
-import { Menu } from "antd";
+import { Menu, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { ComponentMapStyle } from "../styles/componentMapStyle";
 import type { MenuProps } from "antd";
@@ -59,7 +59,17 @@ function ComponentMap() {
   useEffect(() => {
     fetchData();
   }, []);
+  const [visibletooltip, setVisibletooltip] = useState(false);
 
+  function handleVisibleChange(newVisible: any) {
+    setVisibletooltip(newVisible);
+  }
+
+  function closeTooltip() {
+    setVisibletooltip(false);
+  }
+
+  setTimeout(closeTooltip, 1500);
   async function fetchData() {
     const response = await getDatalatlng();
     const response2 = await getDataNeighborhood();
@@ -68,7 +78,7 @@ function ComponentMap() {
     const response5 = await getDataAddress();
     const response6 = await getDataPlaces();
     const response7 = await getDataPlacesName();
-  
+
     const response8 = await getPlaces();
     setData1(response);
     setData2(response6);
@@ -131,40 +141,66 @@ function ComponentMap() {
   };
   const items: MenuProps["items"] = [
     {
-      label: "",
+      label: (
+        <Tooltip arrow={true} title={"Aunmentar"}>
+          {" "}
+          <ZoomInOutlined />
+        </Tooltip>
+      ),
       key: "ZoomIn",
       onClick: handleZoomIn,
-      icon: <ZoomInOutlined />,
     },
     {
-      label: "",
+      label: (
+        <Tooltip arrow={true} title={"Disminuir"}>
+          <ZoomOutOutlined />
+        </Tooltip>
+      ),
       key: "ZoomOut",
       onClick: handleZoomOut,
-      icon: <ZoomOutOutlined />,
     },
     {
-      label: "",
+      label: (
+        <Tooltip arrow={true} title={"Registrar formularios"}>
+          {" "}
+          <FormOutlined />
+        </Tooltip>
+      ),
       key: "Form",
       onClick: handleForm,
-      icon: <FormOutlined />,
     },
     {
-      label: "",
+      label: (
+        <Tooltip arrow={true} title={"Descargar datos"}>
+          <CloudDownloadOutlined />
+        </Tooltip>
+      ),
       key: "AddressesByNeighborhoods",
       onClick: handleAddresses,
-      icon: <CloudDownloadOutlined />,
     },
 
     {
-      label: "",
+      label: (
+        <Tooltip arrow={true} title={"Consulta en registraduría"}>
+          <ContactsOutlined />
+        </Tooltip>
+      ),
       key: "Consultar",
       onClick: handleRedirect,
-      icon: <ContactsOutlined />,
     },
     {
-      label: "",
+      label: (
+        <Tooltip
+          arrow={true}
+          title={"Perfil"}
+          open={visibletooltip}
+          onOpenChange={handleVisibleChange}
+        >
+          <UserOutlined />
+        </Tooltip>
+      ),
       key: "Perfil",
-      icon: <UserOutlined />,
+
       children: [
         {
           label: "Cerrar sesión",
@@ -226,7 +262,7 @@ function ComponentMap() {
                   icon={iconid1}
                   options={{
                     label: {
-                      text:"",
+                      text: "",
                       color: "transparent",
                       fontSize: "2px",
                     },
@@ -242,7 +278,10 @@ function ComponentMap() {
                     icon={iconid}
                     options={{
                       label: {
-                        text: markersToShow.length > 0 ? marker.count.toString() : "",
+                        text:
+                          markersToShow.length > 0
+                            ? marker.count.toString()
+                            : "",
                         color: "#B4AB6F",
                         fontSize: "20px",
                         fontWeight: "bold",

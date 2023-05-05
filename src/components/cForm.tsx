@@ -1,11 +1,13 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button, Card, DatePicker, Form, Input, Select, Modal } from "antd";
-import locale from "antd/es/date-picker/locale/es_ES";
-import axios from "axios";
+
+import 'dayjs/locale/es';
+import locale from 'antd/es/date-picker/locale/es_ES'
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
 function ComponentForm() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -23,7 +25,6 @@ function ComponentForm() {
   });
 
   const placesName = useSelector((state: any) => state.PlacesName);
-  ;
   const [modal, contextHolder] = Modal.useModal();
   const countDown = () => {
     let secondsToGo = 2;
@@ -314,7 +315,11 @@ function ComponentForm() {
               },
             ]}
           >
-            <DatePicker locale={locale} format="YYYY-MM-DD" />
+            <DatePicker
+              format="YYYY-MM-DD"
+              locale={locale}
+              
+            />
           </Form.Item>
           <Form.Item
             label="Lugar de votación"

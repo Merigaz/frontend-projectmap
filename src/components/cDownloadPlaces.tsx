@@ -37,7 +37,16 @@ const AddressesByPlaces = () => {
   const { Places } = useSelector((state: any) => state);
   const [data, setData] = useState<AddressData[]>(Places.Places);
   
-
+  const handleHeaderClick = () => {
+    if (checkedPlaces.length === data.length) {
+      setCheckedPlaces([]);
+    } else {
+      const allcheckedPlaces = data.map(
+        (addressData) => addressData.pollingPlace
+      );
+      setCheckedPlaces(allcheckedPlaces);
+    }
+  };
   const [checkedPlaces, setCheckedPlaces] = useState<string[]>(
     []
   );
@@ -96,6 +105,21 @@ useEffect(() => {
         onChange={(key) => console.log(key)}
         expandIconPosition={expandIconPosition}
       >
+         <Panel
+          collapsible="disabled"
+          header={
+            <div
+              style={{ display: "flex", alignItems: "center" }}
+              onClick={handleHeaderClick}
+            >
+              <Checkbox checked={checkedPlaces.length === data.length}>
+                Marcar Todos
+              </Checkbox>
+            </div>
+          }
+          key="all"
+          showArrow={false}
+        />
         {data.map((placesData, index) => (
           <Panel
             header={

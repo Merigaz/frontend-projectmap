@@ -6,7 +6,6 @@ import { componentsPrimaryTheme, primaryTheme } from "./styles/primaryTheme";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import AppRouter from "./router/router";
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -17,7 +16,7 @@ const queryClient = new QueryClient({
 });
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <ConfigProvider
+    <ConfigProvider 
       theme={{
         token: primaryTheme,
         components: componentsPrimaryTheme,

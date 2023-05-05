@@ -30,22 +30,32 @@ const AddressesByNeighborhoods = () => {
   const [expandIconPosition, setExpandIconPosition] = useState<"start" | "end">(
     "start"
   );
+
+  const handleHeaderClick = () => {
+    if (checkedNeighborhoods.length === data.length) {
+      setCheckedNeighborhoods([]);
+    } else {
+      const allNeighborhoods = data.map(
+        (addressData) => addressData.neighborhood
+      );
+      setCheckedNeighborhoods(allNeighborhoods);
+    }
+  };
   const onPositionChange = (newExpandIconPosition: "start" | "end") => {
     setExpandIconPosition(newExpandIconPosition);
   };
 
   const { AddressData } = useSelector((state: any) => state);
   const [data, setData] = useState<AddressData[]>(AddressData.AddressData);
-  
 
   const [checkedNeighborhoods, setCheckedNeighborhoods] = useState<string[]>(
     []
   );
-useEffect(() => {
+  useEffect(() => {
     // Actualiza el estado del componente cuando cambia el estado de la tienda
     setData(AddressData.AddressData);
   }, [AddressData]);
-  
+
   const handleDownload = async (event: any) => {
     event.preventDefault();
 
@@ -60,9 +70,31 @@ useEffect(() => {
         }
       );
       //Arregla el array
-      console.log(data)
+      console.log(data);
       const newData = data.map(
-        ({ _id, name, id, phone, address, optional, neighborhood, date, pollingPlace, pollingAddress }:{ _id: any, name: string, id: number, phone: string, address: string,optional: string, neighborhood: string, date: Date, pollingPlace: string, pollingAddress: string }) => ({
+        ({
+          _id,
+          name,
+          id,
+          phone,
+          address,
+          optional,
+          neighborhood,
+          date,
+          pollingPlace,
+          pollingAddress,
+        }: {
+          _id: any;
+          name: string;
+          id: number;
+          phone: string;
+          address: string;
+          optional: string;
+          neighborhood: string;
+          date: Date;
+          pollingPlace: string;
+          pollingAddress: string;
+        }) => ({
           NOMBRE: name,
           CÉDULA: id,
           TELÉFONO: phone,
@@ -82,7 +114,9 @@ useEffect(() => {
       const dia = fechaActual.getDate();
       const mes = fechaActual.getMonth() + 1;
       const anio = fechaActual.getFullYear();
-      const fechaFormateada = `${dia < 10 ? '0' : ''}${dia} ${mes < 10 ? '0' : ''}${mes} ${anio}`;
+      const fechaFormateada = `${dia < 10 ? "0" : ""}${dia} ${
+        mes < 10 ? "0" : ""
+      }${mes} ${anio}`;
       XLSX.writeFile(wb, `Barrios-${fechaFormateada}.xlsx`);
     } catch (error) {
       console.log(error);
@@ -96,6 +130,21 @@ useEffect(() => {
         onChange={(key) => console.log(key)}
         expandIconPosition={expandIconPosition}
       >
+        <Panel
+          collapsible="disabled"
+          header={
+            <div
+              style={{ display: "flex", alignItems: "center" }}
+              onClick={handleHeaderClick}
+            >
+              <Checkbox checked={checkedNeighborhoods.length === data.length}>
+                Marcar Todos
+              </Checkbox>
+            </div>
+          }
+          key="all"
+          showArrow={false}
+        />
         {data.map((addressData, index) => (
           <Panel
             header={
@@ -144,15 +193,15 @@ useEffect(() => {
         ))}
       </Collapse>
       <br />
-      {cookies.authToken=="xyz" && cookies1.isAdmin=="true" ? (
-            <Button
-            type="primary"
-            style={ButtonDownloadStyle}
-            onClick={handleDownload}
-          >
-            Descargar información
-          </Button>
-          ) : null}
+      {cookies.authToken == "xyz" && cookies1.isAdmin == "true" ? (
+        <Button
+          type="primary"
+          style={ButtonDownloadStyle}
+          onClick={handleDownload}
+        >
+          Descargar información
+        </Button>
+      ) : null}
       <br />
     </>
   );

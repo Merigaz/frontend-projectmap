@@ -2,13 +2,13 @@ import {  Pie } from '@ant-design/plots';
 import { useSelector } from 'react-redux';
 
 
-const DemoPie = () => {
+const DemoPiePlaces = () => {
 
-  const neighborhoodsCount = useSelector((state:any)=> state.NeighborhoodsCount);
-  const data = neighborhoodsCount.NeighborhoodsCount.map((neighborhoodsCount: any) => ({
+  const placesVote = useSelector((state:any)=> state.PlacesVote);
+  const data = placesVote.PlacesVote.map((placesVote: any) => ({
 
-    name: neighborhoodsCount.name,
-    count: neighborhoodsCount.count
+    name: placesVote.name,
+    count: placesVote.count
   }));
   const config = {
     appendPadding: 20,
@@ -38,4 +38,4 @@ const DemoPie = () => {
   };
   return <Pie {...config} />;
 }
-export default DemoPie;
+export default DemoPiePlaces;
