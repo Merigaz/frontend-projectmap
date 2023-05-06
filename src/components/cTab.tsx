@@ -2,7 +2,8 @@ import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import ComponentForm from './cForm';
 import ComponentFormPlace from './cPlace';
-import {IdcardOutlined, SolutionOutlined } from '@ant-design/icons';
+import ComponentEditDelete from './cEditDelete';
+import { EditOutlined, IdcardOutlined, SolutionOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { getDataAddress, getDataDates, getDataNeighborhood, getDataPlacesCount, getDataPlacesName } from '../hooks/useAxios';
 import { setNeighborhoodsCount } from '../store/reducers/NeighborhoodsCountReducer';
@@ -22,6 +23,12 @@ const items: TabsProps['items'] = [
     key: '2',
     label: <span><SolutionOutlined />Lugares de votación</span>,
     children: <ComponentFormPlace />,
+  },
+  {
+    key: '3',
+    label: <span><EditOutlined />Editar o eliminar</span>,
+    children: <ComponentEditDelete />,
+    forceRender: true,
   }
 ];
 

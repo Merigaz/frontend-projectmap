@@ -8,6 +8,7 @@ import PlacesVoteReducer from './reducers/PlacesVoteReducer';
 import PlacesMarkersReducer from './reducers/PlacesMarkersReducer';
 import PlacesNameReducer from './reducers/PlacesNameReducer';
 import PlacesReducer from './reducers/PlacesReducer';
+import editPlacesReduxer from './reducers/editPlacesReduxer';
 
 
 const store = configureStore({
@@ -21,6 +22,7 @@ const store = configureStore({
     PlacesMarkers: PlacesMarkersReducer,
     PlacesName: PlacesNameReducer,
     Places: PlacesReducer,
+    EditPlace: editPlacesReduxer
   },
 });
 
