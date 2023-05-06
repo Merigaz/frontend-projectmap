@@ -10,13 +10,23 @@ function ComponentEditPlace() {
 
   const dispatch = useDispatch();
   const placesName = useSelector((state: any) => state.PlacesName);
+  const placeName = useSelector((state: any) => state.EditPlace.EditPlace);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const [response, setResponse] = useState<any>(null);
   const [visibleModalDelete, setVisibleModalDelete] = useState(false);
   const [modalDeleteOK, contextHolderDelete] = Modal.useModal();
   const [visibleModalEdit, setVisibleModalEdit] = useState(false);
-
+  const PlacesName = useSelector((state: any) => state.PlacesName.PlacesName);
+  const getAddressByName = (name: string) => {
+    const place = PlacesName.find((place: any) => place.name === name);
+    if (place) {
+      return place.address;
+    }
+    return null;
+  };
+  const address = getAddressByName(placeName);  
+  console.log(address)
   const handleEdit = () => {
     setVisibleModalEdit(true);
   };
@@ -106,19 +116,17 @@ function ComponentEditPlace() {
   const [modal, contextHolder] = Modal.useModal();
   const countDown = () => {
     let secondsToGo = 2;
-
     const instance = modal.success({
-      title: 'Datos subidos satisfactoriamente',
-      
+      title: 'Lugar de votación actualizado',
     });
-
     const timer = setInterval(() => {
       secondsToGo -= 1;
     }, 1000);
-
     setTimeout(() => {
       clearInterval(timer);
       instance.destroy();
+      setVisibleModalEdit(false);
+      form.resetFields()
     }, secondsToGo * 1000);
   };
   const [modalError, contextHolderError] = Modal.useModal();
@@ -148,6 +156,7 @@ function ComponentEditPlace() {
   
     const payload = {
       ...values,
+      previousName: placeName,
       address: address,
       markerAddress: markerAddress
     };
@@ -157,9 +166,9 @@ function ComponentEditPlace() {
       await postData2(payload);
       form2.resetFields();
       countDown()
-      console.log("Form submitted successfully");
+      console.log("Lugar de votación actualizado");
     } catch (error:any) {
-      console.error("Error subiendo datos:", error);
+      console.error("Error editando datos:", error);
       errorModal(error.response.data.mensaje)
     } finally {
       setLoading(false);
@@ -171,7 +180,7 @@ function ComponentEditPlace() {
   const postData2 = async (payload: any) => {
     console.log(payload)
     const response2 = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/submitplace`,
+      `${import.meta.env.VITE_BASE_URL}/updatePlaceByName`,
       payload
     );
     return response2.data;
@@ -215,8 +224,8 @@ function ComponentEditPlace() {
     {response ? (
         <Card style={{ marginTop: 20 }}>
           <p><strong>Información encontrada:</strong></p>
-          <p>Lugar de votación: {response.name}</p>
-          <p>Dirección de votación: {response.address}</p>
+          <p>Lugar de votación: {placeName}</p>
+          <p>Dirección de votación: {address}</p>
           <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             <Button type="primary" onClick={handleEdit} style={{ marginRight: "20px" }}>Editar</Button>
             <Button type="primary" danger onClick={handleDelete}>Eliminar</Button>
@@ -256,6 +265,8 @@ function ComponentEditPlace() {
     >
       <br></br>
       <>
+      <p>Lugar de votación: {placeName}</p>
+      <p>Dirección de votación: {address}</p>
       <Card style={{ borderRadius: 20 }}>
         <Form onFinish={onFinish2} name="form" form={form2}>
           <Form.Item label="Lugar" name="name"
@@ -266,7 +277,7 @@ function ComponentEditPlace() {
               },
             ]}
           >
-            <Input defaultValue={placeName2} />
+            <Input />
           </Form.Item>
           <Form.Item label="Dirección" name="address"
             rules={[
