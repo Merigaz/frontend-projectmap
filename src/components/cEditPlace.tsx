@@ -40,11 +40,9 @@ function ComponentEditPlace() {
     const instance = modalDeleteOK.success({
       title: "Datos eliminados satisfactoriamente",
     });
-
     const timer = setInterval(() => {
       secondsToGo -= 1;
     }, 1000);
-
     setTimeout(() => {
       clearInterval(timer);
       instance.destroy();
@@ -132,17 +130,14 @@ function ComponentEditPlace() {
   const [modalError, contextHolderError] = Modal.useModal();
   const errorModal = (message:any) => {
     let secondsToGo = 4;
-
     const instance = modalError.success({
-      title: 'Ocurrió un error subiendo los datos',
+      title: 'Ocurrió un error editando los datos',
       icon: <ExclamationCircleOutlined style={{ color: 'red' }}/>,
       content: message,
     });
-
     const timer = setInterval(() => {
       secondsToGo -= 1;
     }, 1000);
-
     setTimeout(() => {
       clearInterval(timer);
       instance.destroy();
@@ -151,9 +146,7 @@ function ComponentEditPlace() {
   
   const onFinish2 = async (values: any) => {
     const markerAddress = `${formValues2.select1}${formValues2.input1}${formValues2.select2}#${formValues2.select3}${formValues2.input3}${formValues2.select4}-${formValues2.input5}`
-
     const address = `${formValues2.select1}${formValues2.input1}${formValues2.select2}${formValues2.input2}#${formValues2.select3}${formValues2.input3}${formValues2.select4}${formValues2.input4}-${formValues2.input5}`
-  
     const payload = {
       ...values,
       previousName: placeName,

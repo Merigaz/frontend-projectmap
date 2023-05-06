@@ -9,6 +9,8 @@ import PlacesMarkersReducer from './reducers/PlacesMarkersReducer';
 import PlacesNameReducer from './reducers/PlacesNameReducer';
 import PlacesReducer from './reducers/PlacesReducer';
 import editPlacesReduxer from './reducers/editPlacesReduxer';
+import AllDataAddress from './reducers/AllDataAddress';
+import editAddressReducer from './reducers/editAddressReducer';
 
 
 const store = configureStore({
@@ -22,7 +24,9 @@ const store = configureStore({
     PlacesMarkers: PlacesMarkersReducer,
     PlacesName: PlacesNameReducer,
     Places: PlacesReducer,
-    EditPlace: editPlacesReduxer
+    EditPlace: editPlacesReduxer,
+    AllDataAddress: AllDataAddress,
+    EditAddress: editAddressReducer
   },
 });
 

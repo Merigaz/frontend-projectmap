@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-function ComponentEditFormPlace() {
+function ComponentEditFormAddress() {
 
   const placeName2 = useSelector((state: any) => state.EditPlace.EditPlace);
   console.log(placeName2)
@@ -216,4 +216,4 @@ function ComponentEditFormPlace() {
   );
 }
 
-export default ComponentEditFormPlace;
+export default ComponentEditFormAddress;
