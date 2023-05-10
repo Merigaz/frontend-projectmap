@@ -51,10 +51,10 @@ export async function getDataPlacesCount() {
     `${import.meta.env.VITE_BASE_URL}/listplaces`
   );
   return response.data;
-  }
-  export async function getDataPlacesName() {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/submitplace`
-    );
-    return response.data;
-    }
+}
+export async function getDataPlacesName() {
+  const response = await axios.get(
+    `${import.meta.env.VITE_BASE_URL}/submitplace`
+  );
+  return response.data;
+}
