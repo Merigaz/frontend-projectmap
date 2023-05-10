@@ -78,7 +78,6 @@ function ComponentMap() {
     const response5 = await getDataAddress();
     const response6 = await getDataPlaces();
     const response7 = await getDataPlacesName();
-
     const response8 = await getPlaces();
     setData1(response);
     setData2(response6);
