@@ -17,6 +17,7 @@ interface Address {
   Fecha: string;
   LugardeVotación: string;
   DireccióndeVotación: string;
+  MesadeVotación: string;
 }
 
 interface AddressData {
@@ -83,6 +84,7 @@ const AddressesByNeighborhoods = () => {
           date,
           pollingPlace,
           pollingAddress,
+          votationTable,
         }: {
           _id: any;
           name: string;
@@ -94,6 +96,7 @@ const AddressesByNeighborhoods = () => {
           date: Date;
           pollingPlace: string;
           pollingAddress: string;
+          votationTable: string;
         }) => ({
           NOMBRE: name,
           CÉDULA: id,
@@ -103,6 +106,7 @@ const AddressesByNeighborhoods = () => {
           BARRIO: neighborhood,
           LUGARDEVOTACIÓN: pollingPlace,
           DIRECCIÓNLUGARDEVOTACIÓN: pollingAddress,
+          MESADEVOTACIÓN: votationTable,
           FECHA: date,
         })
       );
@@ -185,6 +189,7 @@ const AddressesByNeighborhoods = () => {
                 <p>{address.InfoAdicional}</p>
                 <p>Lugar de votación: {address.LugardeVotación}</p>
                 <p>Dirección de votación: {address.DireccióndeVotación}</p>
+                <p>Mesa de votación: {address.MesadeVotación}</p>
                 <p>Fecha: {address.Fecha}</p>
                 {index < addressData.datos.length - 1 && <hr />}
               </div>

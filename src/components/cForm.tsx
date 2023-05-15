@@ -345,6 +345,18 @@ function ComponentForm() {
               ))}
             </Select>
           </Form.Item>
+          <Form.Item
+            label="Mesa"
+            name="votationTable"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese la mesa de votación",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
               Enviar
