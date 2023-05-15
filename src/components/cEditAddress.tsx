@@ -211,6 +211,7 @@ function ComponentEditAddress() {
           <p>Barrio: {response.neighborhood}</p>
           <p>Lugar de Votación: {response.pollingPlace}</p>
           <p>Dirección de Votación: {response.pollingAddress}</p>
+          <p>Mesa de Votación: {address? address.votationTable : null}</p>
           <p>Fecha de ingreso: {response.date}</p>
           <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
             <Button type="primary" style={{ marginRight: "20px" }} onClick={handleEdit}>Editar</Button>
@@ -258,6 +259,7 @@ function ComponentEditAddress() {
           <p>Barrio: {address? address.neighborhood : null}</p>
           <p>Lugar de Votación: {address? address.pollingPlace : null}</p>
           <p>Dirección de Votación: {address? address.pollingAddress : null}</p>
+          <p>Mesa de Votación: {address? address.votationTable : null}</p>
           <p>Fecha de ingreso: {address? address.date : null}</p>
       <Card style={{ borderRadius: 20 }}>
         <Form onFinish={onFinish2} name="form" form={form2}>
@@ -504,6 +506,18 @@ function ComponentEditAddress() {
                 </Select.Option>
               ))}
             </Select>
+          </Form.Item>
+          <Form.Item
+            label="Mesa"
+            name="votationTable"
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese la mesa de votación",
+              },
+            ]}
+          >
+            <Input />
           </Form.Item>
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
