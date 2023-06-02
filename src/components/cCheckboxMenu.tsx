@@ -27,11 +27,11 @@ function CheckboxMenu() {
       label: <span>Barrios</span>,
       children: <CheckboxNeighborhood />,
     },
-    {
+   /*  {
       key: "2",
       label: <span>Lugares de votación</span>,
       children: <CheckboxPlaces />,
-    },
+    }, */
   ];
   const [visibletooltip, setVisibletooltip] = useState(false);
 

@@ -355,7 +355,7 @@ function ComponentForm() {
               },
             ]}
           >
-            <Input />
+            <Input style={{ width: 60}} />
           </Form.Item>
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">

@@ -116,7 +116,7 @@ function ComponentMap() {
     window.open("https://wsp.registraduria.gov.co/censo/consultar", "_blank");
   };
 
-  const iconid = {
+  /*   const iconid = {
     url: `http://hluapp.com/icon/user.png`,
     scaledSize: new window.google.maps.Size(56, 86),
     origin: new window.google.maps.Point(0, 0),
@@ -125,7 +125,7 @@ function ComponentMap() {
   };
   const iconvote = {
     url: `http://hluapp.com/icon/vote.png`,
-    scaledSize: new window.google.maps.Size(56, 86),
+    scaledSize: new window.google.maps.Size(26, 56),
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
     labelOrigin: new google.maps.Point(28, 68),
@@ -141,7 +141,7 @@ function ComponentMap() {
     scaledSize: new window.google.maps.Size(56, 56),
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
-  };
+  }; */
   const items: MenuProps["items"] = [
     {
       label: (
@@ -262,7 +262,6 @@ function ComponentMap() {
                   key={(i = i + 2)}
                   position={{ lat: marker.lat, lng: marker.lng }}
                   title={marker.address}
-                  icon={iconid1}
                   options={{
                     label: {
                       text: "",
@@ -278,23 +277,25 @@ function ComponentMap() {
                     key={(j = j + 2)}
                     position={{ lat: marker.lat, lng: marker.lng }}
                     title={marker.address}
-                    icon={iconid}
                     options={{
                       label: {
-                        text:
+                        text: "",
+                        color: "transparent",
+                        fontSize: "2px",
+                        /* text:
                           markersToShow.length > 0
                             ? marker.count.toString()
                             : "",
                         color: "#B4AB6F",
                         fontSize: "20px",
-                        fontWeight: "bold",
+                        fontWeight: "bold" */
                       },
                     }}
                   />
                 ) : null
               ))}
 
-        {data2 &&
+        {/*  {data2 &&
           (PlacesmarkersToShow.length === 0
             ? data2.map((marker: any) => (
                 <Marker
@@ -323,7 +324,7 @@ function ComponentMap() {
                     }}
                   />
                 ) : null
-              ))}
+              ))} */}
 
         <CheckboxMenu />
       </GoogleMap>
